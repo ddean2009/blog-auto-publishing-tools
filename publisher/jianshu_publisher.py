@@ -13,6 +13,8 @@ def jianshu_publisher(driver):
     jianshu_config = read_jianshu()
     common_config = read_common()
 
+    auto_publish = common_config['auto_publish']
+
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
 
@@ -47,7 +49,8 @@ def jianshu_publisher(driver):
 
     # 找到要发表的文集
     # 使用XPath表达式查找元素
-    li_element = driver.find_element(By.XPATH, '//li[@title="AIGC"]')
+    article_collection = jianshu_config['article_collection']
+    li_element = driver.find_element(By.XPATH, f'//li[@title="{article_collection}"]')
     li_element.click()
     time.sleep(2)  # 等待3秒
 
@@ -69,21 +72,22 @@ def jianshu_publisher(driver):
     title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
-    # 发布按钮
-    publish_button = driver.find_element(By.XPATH, '//a[@data-action="publicize"]')
+    if auto_publish:
+        # 发布按钮
+        publish_button = driver.find_element(By.XPATH, '//a[@data-action="publicize"]')
 
-    publish_button.click()
-
-    # 检查弹窗
-    alert = wait.until(EC.text_to_be_present_in_element((By.XPATH, '//div[@role="document"]'), '有图片未上传成功'))
-    if alert:
-        ok_button = driver.find_element(locate_with(By.TAG_NAME, "button").near({By.XPATH: '//div[@role="document"]'}))
-        ok_button.click()
-        time.sleep(2)
-        print("Alert accepted")
-        # 重新发布一次
         publish_button.click()
-    else:
-        print("No alert found")
+
+        # 检查弹窗
+        alert = wait.until(EC.text_to_be_present_in_element((By.XPATH, '//div[@role="document"]'), '有图片未上传成功'))
+        if alert:
+            ok_button = driver.find_element(locate_with(By.TAG_NAME, "button").near({By.XPATH: '//div[@role="document"]'}))
+            ok_button.click()
+            time.sleep(2)
+            print("Alert accepted")
+            # 重新发布一次
+            publish_button.click()
+        else:
+            print("No alert found")
 
     time.sleep(2)

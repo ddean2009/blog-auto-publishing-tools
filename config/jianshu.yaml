@@ -1,5 +1,6 @@
 site: https://www.jianshu.com/
-
+# 要发表的文集，需要修改成你自己的文集
+article_collection: AIGC
 
 
 

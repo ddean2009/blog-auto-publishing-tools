@@ -1,6 +1,8 @@
 # blog-auto-publishing-tools博客自动发布工具
 博客自动发布工具，一键把你的博客发到CSDN,简书,掘金,知乎,头条,51blog,腾讯云,阿里云等等
 
+觉得有用的朋友，请给个star!
+
 # 介绍
 
 在数字化时代，内容创作与传播的速度与广度对于个人或企业品牌的建设至关重要。然而，许多博客作者和内容创作者在发布内容时，面临着跨平台发布的繁琐与不便。每个平台都有其独特的发布规则和操作流程，手动发布不仅耗时耗力，而且容易因为重复劳动而出现错误。为了解决这一痛点，我开发了这款博客自动发布工具。
@@ -82,14 +84,46 @@ debugger_address: localhost:9222/devtools/browser/4aab2b8b-112c-48a3-ba38-12baa1
 
 把service_location和debugger_address修改为你自己本机的配置。
 
+```yaml
+enable:
+  csdn: True
+  jianshu: True
+  juejin: True
+  segmentfault: True
+  oschina: True
+  cnblogs: True
+  zhihu: True
+  cto51: True
+  infoq: True
+  toutiao: True
+  alicloud: True
+  txcloud: True
+```
+
+这些按照你自己的需求开启。
+
+修改各个平台对应的yaml文件内容。有些平台的配置比较复杂，比如需要配置集合名字，tag名字，标签等等信息。
+
+大家可以参考我的系列教程来进行配置。
+
+或者直接看配置文件，我都写好注释了。直接进行对应的修改即可。
+
 5. 运行程序
 
 运行open_all.py 可以自动打开所有的博客网站。
 
 运行publish_all.py 可以自动发布博客内容。
 
+> 切记，在发布博客之前，一定要先保证你的账号是登录状态，否则无法发送博客。
+
+
 
 # 系列教程
+
+> 注意，在使用工具之前一定要确保你阅读过下面的教程，更改了必要的配置，否则有可能发布失败。
+> 
+
+
 
 
 
