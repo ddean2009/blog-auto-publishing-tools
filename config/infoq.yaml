@@ -1,0 +1,12 @@
+site: https://www.infoq.cn/
+
+# 文章分类:后端开发，前端开发，数据库，开源，软件研发，人工智能，服务器，AIGC, 办公效率
+type: 人工智能
+# 个人分类
+personal_type: 人工智能
+# 标签
+tags:
+  - 人工智能
+  - aigc
+  - openai
+  - 程序那些事

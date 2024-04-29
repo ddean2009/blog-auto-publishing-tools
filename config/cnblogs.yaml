@@ -1,0 +1,25 @@
+site: https://i.cnblogs.com/posts/edit
+# 个人分类  工具技巧 AIGC
+categories:
+  - AIGC
+
+# 添加到合集: 工具技巧 AIGC
+collections:
+  - AIGC
+
+# 投顾网站分类ID:
+  # 后端开发：Java,Python,
+  # 软件设计: 架构设计 面向对象 设计模式 领域驱动设计
+  # 前端开发：Html/Css JavaScript jQuery HTML5 Angular React
+  # AI: AI综合 机器学习 大模型
+  # 移动开发: Android开发 iOS开发 Flutter
+  # 数据库:MySQL Oracle 大数据 NoSQL
+  # 其他分类:计算机图形学 游戏开发 程序人生 求职面试 开源研究 算法与数据结构 区块链 网络安全 其他技术区
+topic: 开源研究
+
+tags:
+  - 人工智能
+  - aigc
+  - openai
+  - ai开发
+  - 程序那些事

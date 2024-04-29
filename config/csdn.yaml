@@ -1,0 +1,16 @@
+site: https://editor.csdn.net/md/
+
+#文章标签
+tags:
+  - 程序那些事
+  - AIGC
+
+#分类专栏
+categories:
+  - 程序那些事
+  - AIGC
+
+# 可见范围 public, private,needfans,needvip
+visibility: needfans
+
+

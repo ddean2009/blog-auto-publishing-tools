@@ -1,0 +1,41 @@
+site: https://my.oschina.net/flydean/blog/write
+#专辑
+collection: 程序那些事
+#推广专区:45	Llama中文社区
+  #44	ChatGPT
+  #43	非结构化数据
+  #28	大前端
+  #27	开发技能
+  #10	数据库
+  #9	云计算
+  #17	飞桨专区
+  #16	OpenHarmony专区
+  #19	开源治理
+  #46	银河麒麟专区
+  #14	程序人生
+  #26	软件架构
+  #15	行业趋势
+  #11	硬件 & IoT
+  #8	AI & 大数据
+  #39	昇思MindSpore
+  #35	OpenVINO 中文社区
+  #42	摸鱼专区
+  #41	OneOS
+  #40	华为开发者联盟
+  #38	PostgreSQL
+  #37	Linux基金会开源软件大学
+  #36	OSCTraining
+  #34	EdgeX 中文社区
+  #31	鲲鹏专区
+  #30	openEuler
+  #25	信息安全
+  #24	运维
+  #23	软件测试
+  #22	网络技术
+  #21	游戏开发
+  #20	多媒体处理
+#13	DevOps
+#6	区块链
+topic: ChatGPT
+
+
