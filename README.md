@@ -122,6 +122,9 @@ enable:
 
 > 注意，在使用工具之前一定要确保你阅读过下面的教程，更改了必要的配置，否则有可能发布失败。
 > 
+> 
+
+[一键自动化博客发布工具,用过的人都说好(简书篇)](http://www.flydean.com/blog/projects/001-auto-blog-publish-tool-jianshu/)
 
 
 
