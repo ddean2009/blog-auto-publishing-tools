@@ -1,7 +1,7 @@
 # blog-auto-publishing-tools博客自动发布工具
 博客自动发布工具，一键把你的博客发到CSDN,简书,掘金,知乎,头条,51blog,腾讯云,阿里云等等
 
-觉得有用的朋友，请给个star!
+觉得有用的朋友，请给个star! ![Github stars](https://img.shields.io/github/stars/ddean2009/blog-auto-publishing-tools.svg)
 
 # 介绍
 
