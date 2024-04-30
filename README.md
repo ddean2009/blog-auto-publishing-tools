@@ -110,6 +110,19 @@ enable:
 
 5. 运行程序
 
+安装python依赖：
+
+```python
+pip install -r requirements.txt 
+```
+
+本工具使用了pandoc  https://www.pandoc.org/  来进行markdown 到html的转化。
+
+有些博客平台不支持markdown格式，所以需要安装pandoc。
+
+如果你的博客平台支持markdown的，可以不需要这个工具。
+
+
 运行open_all.py 可以自动打开所有的博客网站。
 
 运行publish_all.py 可以自动发布博客内容。
