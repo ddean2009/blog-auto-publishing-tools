@@ -35,6 +35,7 @@ def zhihu_publisher(driver):
 
     # 文章内容 html版本
     content_file = common_config['content']
+    # 注意，zhihu 不能识别转换过后的代码块格式
     content_file_html = convert_md_to_html(content_file)
     get_html_web_content(driver, content_file_html)
     time.sleep(2)  # 等待2秒

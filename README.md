@@ -60,6 +60,13 @@ TODO
 2. 下载chrome Driver [Chrome Driver](https://googlechromelabs.github.io/chrome-for-testing/)。
 3. chrome 以debug模式启动
 
+如果是mac电脑，那么可以先给chrome设置一个alias
+
+```bash
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+```
+以debug模式启动
+
 ```bash
 chrome --remote-debugging-port=9222
 ```
