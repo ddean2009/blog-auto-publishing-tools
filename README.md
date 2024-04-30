@@ -70,6 +70,8 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 ```bash
 chrome --remote-debugging-port=9222
 ```
+> !!!! 注意！！！
+> chrome启动之后，一定要新开一个空白tab页，或者随便打开一个网站，否则后面的selenium可能会出现假死的情况
 
 在命令行你会看到类似下面的内容：
 
@@ -128,7 +130,6 @@ pip install -r requirements.txt
 有些博客平台不支持markdown格式，所以需要安装pandoc。
 
 如果你的博客平台支持markdown的，可以不需要这个工具。
-
 
 运行open_all.py 可以自动打开所有的博客网站。
 
