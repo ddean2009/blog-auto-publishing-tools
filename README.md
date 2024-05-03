@@ -80,6 +80,31 @@ chrome --remote-debugging-port=9222
 
 这行ws很重要，我们把它记下来。
 
+如果你是windows，那么在chrome的快捷方式后面加上 --remote-debugging-port=9222 参数。
+
+![image-20240503190824756](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405031908055.png)
+
+
+
+启动chrome，输入chrome://version 检测 --remote-debugging-port=9222 是否出现在页面上。
+
+![image-20240503190854471](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405031908887.png)
+
+
+
+然后输入：
+
+> http://localhost:9222/json/version
+
+获得 webSocketDebuggerUrl：
+
+
+
+![image-20240503190939248](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405031909990.png)
+
+
+
+
 4. 修改配置文件
 
 修改config/common.yaml 里面的内容：

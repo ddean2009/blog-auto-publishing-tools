@@ -2,7 +2,7 @@ import yaml
 import os
 
 
-def read_yaml(file):
+def read_yaml(file, encoding='UTF-8'):
     """
     读取并解析 YAML 格式的配置文件。
 
@@ -15,7 +15,7 @@ def read_yaml(file):
     异常:
     如果遇到 YAML 解析错误，将打印错误信息。
     """
-    with open(file, 'r') as stream:  # 打开文件并以读取模式进行处理
+    with open(file, 'r', encoding=encoding) as stream:  # 打开文件并以读取模式进行处理
         try:
             data = yaml.safe_load(stream)  # 安全地解析 YAML 格式的文件内容
             return data
@@ -62,6 +62,7 @@ def read_zhihu():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/zhihu.yaml'))
 
+
 def read_juejin():
     """
     读取掘金配置文件。
@@ -74,41 +75,51 @@ def read_juejin():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/juejin.yaml'))
 
+
 def read_segmentfault():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/segmentfault.yaml'))
+
 
 def read_oschina():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/oschina.yaml'))
 
+
 def read_cnblogs():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/cnblogs.yaml'))
+
 
 def read_zhihu():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/zhihu.yaml'))
 
+
 def read_51cto():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/51cto.yaml'))
+
 
 def read_infoq():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/infoq.yaml'))
 
+
 def read_txcloud():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/txcloud.yaml'))
+
 
 def read_alcloud():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/alicloud.yaml'))
 
+
 def read_toutiao():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/toutiao.yaml'))
+
 
 def read_csdn():
     """
