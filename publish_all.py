@@ -1,3 +1,5 @@
+import traceback
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -59,6 +61,7 @@ def publish_to_platform(platform, driver):
         globals()[platform + '_publisher'](driver)  # 动态调用对应平台的发布函数
     except Exception as e:
         print(platform,"got error")
+        traceback.print_exc()  # 打印完整的异常跟踪信息
         print(e)
 
 
