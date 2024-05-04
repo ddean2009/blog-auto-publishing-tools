@@ -217,6 +217,7 @@ pip install -r requirements.txt
 > 
 
 [一键自动化博客发布工具,用过的人都说好(简书篇)](http://www.flydean.com/blog/projects/001-auto-blog-publish-tool-jianshu/)
+
 [一键自动化博客发布工具,chrome和firfox详细配置](http://www.flydean.com/blog/projects/002-auto-blog-publish-tool-chrome-firfox)
 
 
