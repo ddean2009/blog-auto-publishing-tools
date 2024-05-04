@@ -26,7 +26,7 @@ if driver_type == 'chrome':
     # Chrome 的调试地址
     debugger_address = common_config['debugger_address']
     # 创建Chrome选项，重用现有的浏览器实例
-    options = selenium.webdriver.chrome.service.Options()
+    options = selenium.webdriver.chrome.options.Options()
     options.page_load_strategy = 'normal'  # 设置页面加载策略为'normal' 默认值, 等待所有资源下载,
     options.add_experimental_option('debuggerAddress', debugger_address)
     # 使用服务和选项初始化WebDriver
