@@ -1,7 +1,11 @@
 # chrome driver地址
 service_location: /Users/wayne/Downloads/work/chromedriver-mac-arm64/chromedriver
 # chrome调试地址
-debugger_address: 127.0.0.1:9222/devtools/browser/2fa59d8a-7d9e-491d-8e51-8d0ca0c8f9e4
+#debugger_address: 127.0.0.1:9222/devtools/browser/2fa59d8a-7d9e-491d-8e51-8d0ca0c8f9e4
+debugger_address: 127.0.0.1:9222
+
+driver_type: "chrome"
+#driver_type: "firefox"
 
 # 是否包含自定义footer
 include_footer: true

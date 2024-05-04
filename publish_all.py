@@ -1,8 +1,7 @@
 import traceback
 
+import selenium
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 
 from publisher.alicloud_publisher import alicloud_publisher
 from publisher.cnblogs_publisher import cnblogs_publisher
@@ -19,23 +18,27 @@ from publisher.juejin_publisher import juejin_publisher
 from utils.yaml_file_utils import read_common
 
 common_config = read_common()
-# 启动浏览器驱动服务
-service = Service(common_config['service_location'])
-
-# Chrome 的调试地址
-debugger_address = common_config['debugger_address']
-
-# 创建Chrome选项，重用现有的浏览器实例
-options = Options()
-options.page_load_strategy = 'normal'  # 设置页面加载策略为'normal' 默认值, 等待所有资源下载,
-# options.page_load_strategy = 'eager' # 设置页面加载策略为'eager' 默认值, 不等待资源下载,
-# options.page_load_strategy = 'none'  # 完全不会阻塞 WebDriver
-
-# options.add_experimental_option("detach", True)  # 将 detach 参数设置为true将在驱动过程结束后保持浏览器的打开状态.
-options.add_experimental_option('debuggerAddress', debugger_address)
-
-# 使用服务和选项初始化WebDriver
-driver = webdriver.Chrome(service=service, options=options)
+driver_type= common_config['driver_type']
+if driver_type == 'chrome':
+    # 启动浏览器驱动服务
+    service = selenium.webdriver.chrome.service.Service(common_config['service_location'])
+    # Chrome 的调试地址
+    debugger_address = common_config['debugger_address']
+    # 创建Chrome选项，重用现有的浏览器实例
+    options = selenium.webdriver.chrome.service.Options()
+    options.page_load_strategy = 'normal'  # 设置页面加载策略为'normal' 默认值, 等待所有资源下载,
+    options.add_experimental_option('debuggerAddress', debugger_address)
+    # 使用服务和选项初始化WebDriver
+    driver = webdriver.Chrome(service=service, options=options)
+elif driver_type == 'firefox':
+    # 启动浏览器驱动服务
+    service = selenium.webdriver.firefox.service.Service(common_config['service_location'],
+                                                         service_args=['--marionette-port', '2828',
+                                                                       '--connect-existing'])
+    # 创建firefox选项，重用现有的浏览器实例
+    options = selenium.webdriver.firefox.options.Options()
+    options.page_load_strategy = 'normal'  # 设置页面加载策略为'normal' 默认值, 等待所有资源下载,
+    driver = webdriver.Firefox(service=service, options=options)
 
 driver.implicitly_wait(10)  # 设置隐式等待时间为15秒
 
