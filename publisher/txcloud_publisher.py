@@ -28,16 +28,12 @@ def txcloud_publisher(driver):
     time.sleep(2)  # 等待2秒
 
     # 切换到markdown编辑器
-    # 定义超时时间
-    # timeout = 3
-    # # 等待直到'a'元素出现
-    # wait = WebDriverWait(driver, timeout)
-    # a_element = wait.until(EC.presence_of_element_located((By.XPATH, '//a[contains(text(),"切换到Markdown编辑器")]')))
-    # # 检查元素是否存在
-    # if a_element.is_displayed():
-    #     # 如果存在，执行点击操作
-    #     a_element.click()
-    # time.sleep(2)
+    a_switch = driver.find_element(By.XPATH, '//div[@class="col-editor-switch"]//a')
+    # 获取a元素的文本内容
+    text_content = a_switch.text
+    if text_content == '切换到Markdown编辑器':
+        a_switch.click()
+    time.sleep(2)
 
     # 文章分类
     # TODO
