@@ -47,14 +47,16 @@ TODO
 
 
 | 浏览器 | 支持情况 |
-| --- |---|
+| --- |--|
 | Chrome | ✔️ |
-| Firefox | ❌ |
+| Firefox | ✔️ |
 | Safari | ❌️ |
 | Edge | ❌ |
 | Internet Explorer | ❌ |
 
 # 使用方法
+
+## 使用chrome 
 
 1. 下载并安装 [Chrome](https://www.google.com/chrome/)。
 2. 下载chrome Driver [Chrome Driver](https://googlechromelabs.github.io/chrome-for-testing/)。
@@ -117,6 +119,48 @@ debugger_address: localhost:9222/devtools/browser/4aab2b8b-112c-48a3-ba38-12baa1
 ```
 
 把service_location和debugger_address修改为你自己本机的配置。
+
+> 你也可以使用简单版本的 debugger_address: localhost:9222
+>
+> 我在windows环境下测试过是可以连接的。
+>
+> 在mac环境下有时可以连接，有时候不能连接，大家可以自行测试。
+
+## 使用firefox
+1. 下载并安装 [Firefox](https://www.mozilla.org/en-US/firefox/new/)。
+2. 下载[**geckodriver**](https://github.com/mozilla/geckodriver/releases) 驱动.下载与你的Firefox浏览器版本相对应的geckodriver。确保你下载的是与你的操作系统和Firefox版本相匹配的版本。
+
+3. 在firefox的启动命令之后加上： ` -marionette -start-debugger-server 2828`
+
+![image-20240504120509315](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405041205192.png)
+
+> 注意，这里的端口一定要是2828,不能自定义。
+
+这时候你如果打开firefox,就会看到导航栏变成了红色，表示你已经启动了远程调试模式。
+
+![image-20240504120607831](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405041206516.png)
+
+输入`about:config`
+
+可以看到marionette.port的端口就是2828。
+
+4. 修改配置文件
+
+修改config/common.yaml 里面的内容：
+
+```yaml
+# firefox driver地址
+service_location: "D:\\downloads\\geckodriver-v0.34.0-win32\\geckodriver.exe"
+```
+
+把driver_type修改为firefox。
+
+```python
+#driver_type: "chrome"
+driver_type: "firefox"
+```
+
+## 其他配置
 
 ```yaml
 enable:
