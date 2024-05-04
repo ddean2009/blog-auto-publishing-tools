@@ -36,6 +36,19 @@ def read_common():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/common.yaml'))  # 读取并返回配置文件中的数据
 
+def read_common_video():
+    """
+    读取通用配置文件。
+
+    该函数没有参数。
+
+    返回:
+        返回从通用配置文件中读取的数据。
+    """
+    # 获取当前工作目录
+    current_dir = os.getcwd()
+    return read_yaml(os.path.join(current_dir, 'config/common_video.yaml'))  # 读取并返回配置文件中的数据
+
 
 def read_jianshu():
     """
@@ -48,6 +61,23 @@ def read_jianshu():
     """
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/jianshu.yaml'))
+
+def read_xiaohongshu():
+    current_dir = os.getcwd()
+    return read_yaml(os.path.join(current_dir, 'config/xiaohongshu.yaml'))
+
+def read_douyin():
+    current_dir = os.getcwd()
+    return read_yaml(os.path.join(current_dir, 'config/douyin.yaml'))
+
+
+def read_kuaishou():
+    current_dir = os.getcwd()
+    return read_yaml(os.path.join(current_dir, 'config/kuaishou.yaml'))
+
+def read_shipinhao():
+    current_dir = os.getcwd()
+    return read_yaml(os.path.join(current_dir, 'config/shipinhao.yaml'))
 
 
 def read_zhihu():

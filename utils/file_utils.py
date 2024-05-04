@@ -5,8 +5,37 @@ import subprocess
 from utils.yaml_file_utils import read_common
 
 
+def list_files(video_dir, extension='.mp4'):
+    return_files = []
+    for root, dirs, files in os.walk(video_dir):
+        for file in files:
+            if file.endswith(extension):
+                return_files.append(os.path.join(root, file))
+    return sorted(return_files)
+
+def read_head(file):
+    with open(file, 'r', encoding='UTF-8') as file:
+        # 读取文件内容
+        head = file.readline()
+        return head
+
+def read_file_with_extra_enter(file):
+    with open(file, 'r', encoding='UTF-8') as f:
+        # 读取文件内容
+        content = f.read()
+        # 使用splitlines()将内容分割成行列表
+        lines = content.splitlines()
+        # 检查列表是否为空，并且只处理第一行（如果存在）
+        if lines:
+            # 在第一行末尾添加换行符（如果它不存在）
+            if not lines[0].endswith('\n'):
+                lines[0] += '\n'
+        # 使用join()将行重新组合成字符串
+        cleaned_content = '\n'.join(lines)
+        return cleaned_content
+
 def read_file(file):
-    with open(file, 'r') as file:
+    with open(file, 'r', encoding='UTF-8') as file:
         # 读取文件内容
         content = file.read()
         cleaned_content = remove_front_matter(content)
