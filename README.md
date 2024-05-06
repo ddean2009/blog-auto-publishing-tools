@@ -237,6 +237,10 @@ pip install -r requirements.txt
 
 [一键自动化博客发布工具,chrome和firfox详细配置](http://www.flydean.com/blog/projects/002-auto-blog-publish-tool-chrome-firfox)
 
+[一键自动化博客发布工具,用过的人都说好(segmentfault篇)](http://www.flydean.com/blog/projects/003-auto-blog-publish-tool-segmentfault)
+
+[一键自动化博客发布工具,用过的人都说好(oschina篇)](http://www.flydean.com/blog/projects/004-auto-blog-publish-tool-oschina)
+
 
 
 

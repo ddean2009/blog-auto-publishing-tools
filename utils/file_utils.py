@@ -9,6 +9,15 @@ import yaml
 
 from utils.yaml_file_utils import read_common
 
+# 获取当前脚本的绝对路径
+script_path = os.path.abspath(__file__)
+
+print("当前脚本的绝对路径是:", script_path)
+
+# 脚本所在的目录
+script_dir = os.path.dirname(script_path)
+print("脚本所在的目录是:", script_dir)
+
 
 def list_all_files(video_dir, extension='.mp4'):
     return_files = []
@@ -18,12 +27,14 @@ def list_all_files(video_dir, extension='.mp4'):
                 return_files.append(os.path.join(root, file))
     return sorted(return_files)
 
+
 def list_files(video_dir, extension='.mp4'):
     return_files = []
     for file in os.listdir(video_dir):
         if file.endswith(extension):
             return_files.append(os.path.join(video_dir, file))
     return sorted(return_files)
+
 
 def read_head(file):
     with open(file, 'r', encoding='UTF-8') as file:
@@ -116,8 +127,12 @@ def convert_md_to_html(md_filename):
     if os.path.exists(html_filename):
         return html_filename
 
+    # 同一目录下另一个文件的路径
+    pandoc_css_path = os.path.join(script_dir, 'pandoc.css')
+
     # 构造pandoc命令
-    command = ['pandoc', md_filename, '-o', html_filename]
+    command = ['pandoc --standalone  --css', pandoc_css_path, '-f markdown -t html5 --no-highlight', md_filename, '-o',
+               html_filename]
 
     # 调用系统命令
     subprocess.run(command)

@@ -10,7 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-from utils.file_utils import read_file_with_footer
+from utils.file_utils import read_file_with_footer, parse_front_matter
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina
 import time
 
@@ -18,6 +18,10 @@ import time
 def oschina_publisher(driver):
     oschina_config = read_oschina()
     common_config = read_common()
+    auto_publish = common_config['auto_publish']
+
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -40,12 +44,15 @@ def oschina_publisher(driver):
     content.click()
     # 模拟实际的粘贴操作
     action_chains.key_down(cmd_ctrl).send_keys('v').key_up(cmd_ctrl).perform()
-    time.sleep(3)  # 等待5秒 不需要进行图片解析
+    time.sleep(3)  # 等待3秒
 
     # 文章标题
     title = driver.find_element(By.NAME, 'title')
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
     # 发布按钮
@@ -73,7 +80,8 @@ def oschina_publisher(driver):
 
 
     # 确认发布
-    confirm_button = driver.find_element(By.XPATH, '//div[contains(@class,"submit button effective-button")]')
-    # confirm_button.click()
+    if auto_publish:
+        confirm_button = driver.find_element(By.XPATH, '//div[contains(@class,"submit button effective-button")]')
+        confirm_button.click()
 
     time.sleep(2)

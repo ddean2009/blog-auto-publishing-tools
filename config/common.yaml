@@ -23,7 +23,7 @@ enable:
   csdn: True
   jianshu: True
   juejin: True
-  segmentfault: True
+  segmentfault: False
   oschina: True
   cnblogs: True
   zhihu: True
