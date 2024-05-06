@@ -73,7 +73,7 @@ def publish_to_all_platforms(driver):
     发布到所有平台的封装函数
     """
     for platform in all_sites:
-        if common_config['enable'][platform]:
+        if platform in common_config['enable'] and common_config['enable'][platform]:
             publish_to_platform(platform, driver)
     # 在需要的时候关闭浏览器，不要关闭浏览器进程
     driver.quit()

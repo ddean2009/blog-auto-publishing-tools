@@ -10,7 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-from utils.file_utils import read_file_with_footer
+from utils.file_utils import read_file_with_footer, parse_front_matter
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
     read_infoq, read_txcloud, read_alcloud
 import time
@@ -19,6 +19,9 @@ import time
 def alicloud_publisher(driver):
     alicloud_config = read_alcloud()
     common_config = read_common()
+    auto_publish = common_config['auto_publish']
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -30,7 +33,10 @@ def alicloud_publisher(driver):
     # 文章标题
     title = driver.find_element(By.XPATH, '//input[@placeholder="请填写标题"]')
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
     # 文章内容 markdown版本
@@ -40,7 +46,10 @@ def alicloud_publisher(driver):
     time.sleep(3)  # 等待3秒
 
     # 摘要
-    summary = common_config['summary']
+    if 'description' in front_matter['description'] and front_matter['description']:
+        summary = front_matter['description']
+    else:
+        summary = common_config['summary']
     if summary:
         summary_input = driver.find_element(By.XPATH, '//div[@class="abstractContent-box"]//textarea[@placeholder="请填写摘要"]')
         summary_input.send_keys(summary)
@@ -52,5 +61,6 @@ def alicloud_publisher(driver):
     # TODO
 
     # 发布
-    publish_button = driver.find_element(By.XPATH, '//div[@class="publish-fixed-box-btn"]/button[contains(text(),"发布文章")]')
-    # publish_button.click()
+    if auto_publish:
+        publish_button = driver.find_element(By.XPATH, '//div[@class="publish-fixed-box-btn"]/button[contains(text(),"发布文章")]')
+        publish_button.click()

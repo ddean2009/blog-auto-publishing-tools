@@ -1,6 +1,11 @@
 import os
 import re
 import subprocess
+from tempfile import gettempdir
+from urllib.parse import urlparse
+
+import requests
+import yaml
 
 from utils.yaml_file_utils import read_common
 
@@ -13,12 +18,15 @@ def list_files(video_dir, extension='.mp4'):
                 return_files.append(os.path.join(root, file))
     return sorted(return_files)
 
+
 def read_head(file):
     with open(file, 'r', encoding='UTF-8') as file:
         # 读取文件内容
         head = file.readline()
         return head
 
+
+# 读取第一行之后 添加一个回车，适用于第一行是文章标题的情况
 def read_file_with_extra_enter(file):
     with open(file, 'r', encoding='UTF-8') as f:
         # 读取文件内容
@@ -34,12 +42,20 @@ def read_file_with_extra_enter(file):
         cleaned_content = '\n'.join(lines)
         return cleaned_content
 
+
 def read_file(file):
     with open(file, 'r', encoding='UTF-8') as file:
         # 读取文件内容
         content = file.read()
         cleaned_content = remove_front_matter(content)
         return cleaned_content
+
+
+def read_file_all_content(file):
+    with open(file, 'r', encoding='UTF-8') as file:
+        # 读取文件内容
+        content = file.read()
+        return content
 
 
 def read_file_with_footer(file):
@@ -61,6 +77,25 @@ def remove_front_matter(markdown_content):
     # 使用re.sub替换front matter为空字符串
     cleaned_content = re.sub(front_matter_pattern, '', markdown_content, flags=re.MULTILINE)
     return cleaned_content
+
+
+# 解析markdown中的front matter的内容
+def parse_front_matter(content_file):
+    metadata = []
+    markdown_content = read_file_all_content(content_file)
+    # 使用正则表达式匹配Front matter部分
+    front_matter_pattern = re.compile(r'^---\n(.+?)\n---', re.DOTALL | re.MULTILINE)
+    # 搜索并提取Front matter
+    front_matter_match = front_matter_pattern.search(markdown_content)
+    if front_matter_match:
+        # 提取Front matter的内容
+        front_matter_content = front_matter_match.group(1)
+        # 使用yaml.safe_load解析YAML内容
+        metadata = yaml.safe_load(front_matter_content)
+        # print(metadata)
+    else:
+        print("没有找到Front matter部分。")
+    return metadata
 
 
 def convert_md_to_html(md_filename):
@@ -96,3 +131,38 @@ def convert_md_to_html(md_filename):
 
     # 返回转换后的HTML文件名
     return html_filename
+
+
+def download_image(url):
+    # 检查URL是否以http开头
+    if not url.startswith('http'):
+        print("URL does not start with 'http'. Skipping download.")
+        return url
+
+    # 获取临时目录
+    temp_dir = gettempdir()
+
+    # 尝试解析URL
+    try:
+        parsed_url = urlparse(url)
+        # 从URL中提取文件名
+        filename = os.path.basename(parsed_url.path)
+        # 完整的文件路径
+        file_path = os.path.join(temp_dir, filename)
+
+        # 发送GET请求
+        response = requests.get(url, stream=True)
+
+        # 检查请求是否成功
+        if response.status_code == 200:
+            with open(file_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=1024):
+                    if chunk:  # 过滤掉保持连接的chunk
+                        f.write(chunk)
+            print(f"Image downloaded to {file_path}")
+            return file_path
+        else:
+            print(f"Failed to download image. HTTP Status Code: {response.status_code}")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
