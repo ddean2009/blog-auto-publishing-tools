@@ -49,6 +49,19 @@ def read_common_video():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/common_video.yaml'))  # 读取并返回配置文件中的数据
 
+def read_common_video_firefox():
+    """
+    读取通用配置文件。
+
+    该函数没有参数。
+
+    返回:
+        返回从通用配置文件中读取的数据。
+    """
+    # 获取当前工作目录
+    current_dir = os.getcwd()
+    return read_yaml(os.path.join(current_dir, 'config/common_video_firefox_english.yaml'))  # 读取并返回配置文件中的数据
+
 
 def read_jianshu():
     """

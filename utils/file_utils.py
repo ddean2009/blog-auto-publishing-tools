@@ -10,7 +10,7 @@ import yaml
 from utils.yaml_file_utils import read_common
 
 
-def list_files(video_dir, extension='.mp4'):
+def list_all_files(video_dir, extension='.mp4'):
     return_files = []
     for root, dirs, files in os.walk(video_dir):
         for file in files:
@@ -18,6 +18,12 @@ def list_files(video_dir, extension='.mp4'):
                 return_files.append(os.path.join(root, file))
     return sorted(return_files)
 
+def list_files(video_dir, extension='.mp4'):
+    return_files = []
+    for file in os.listdir(video_dir):
+        if file.endswith(extension):
+            return_files.append(os.path.join(video_dir, file))
+    return sorted(return_files)
 
 def read_head(file):
     with open(file, 'r', encoding='UTF-8') as file:
