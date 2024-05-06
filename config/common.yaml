@@ -10,11 +10,11 @@ driver_type: "chrome"
 # 是否包含自定义footer
 include_footer: true
 # 文章的标题
-title: 一键自动化博客发布工具,用过的人都说好(简书篇)
+title: 一键自动化博客发布工具,chrome和firfox详细配置
 # 文章的内容
-content: /Users/wayne/Downloads/blogthings/blogs/blog/projects/001-auto-blog-publish-tool-jianshu.md
+content: /Users/wayne/Downloads/blogthings/blogs/blog/projects/002-auto-blog-publish-tool-chrome-firfox.md
 # 文章的摘要
-summary: 给大家推荐一个一键自动化博客发布工具，完全的一键操作，让你轻松告别手动发布博客的烦恼。
+summary: blog-auto-publishing-tools博客自动发布工具现在已经可以同时支持chrome和firefox了.
 
 # 是否自动发布博客，不经过人工review
 auto_publish: False

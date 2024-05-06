@@ -1,3 +1,16 @@
+- [blog-auto-publishing-tools博客自动发布工具](#blog-auto-publishing-tools博客自动发布工具)
+- [介绍](#介绍)
+- [功能列表](#功能列表)
+  - [从浏览器自动发布](#从浏览器自动发布)
+  - [后台自动发布](#后台自动发布)
+- [支持的浏览器](#支持的浏览器)
+- [使用方法](#使用方法)
+  - [使用chrome](#使用chrome)
+  - [使用firefox](#使用firefox)
+  - [其他配置](#其他配置)
+- [系列教程](#系列教程)
+
+
 # blog-auto-publishing-tools博客自动发布工具
 博客自动发布工具，一键把你的博客发到CSDN,简书,掘金,知乎,头条,51blog,腾讯云,阿里云等等
 
@@ -35,9 +48,9 @@
 - [x] 支持txcloud
 - [x] 支持知乎
 
-目前从浏览器发布博客的方式无法模拟自动上传封面图片。
+> 好消息！！！！
+> 最新版本 在某些博客平台已经可以模拟自动上传封面图片了。
 
-这是浏览器模拟的限制，目前还没想到解决办法。
 
 ## 后台自动发布
 
@@ -47,14 +60,16 @@ TODO
 
 
 | 浏览器 | 支持情况 |
-| --- |---|
+| --- |--|
 | Chrome | ✔️ |
-| Firefox | ❌ |
+| Firefox | ✔️ |
 | Safari | ❌️ |
 | Edge | ❌ |
 | Internet Explorer | ❌ |
 
 # 使用方法
+
+## 使用chrome 
 
 1. 下载并安装 [Chrome](https://www.google.com/chrome/)。
 2. 下载chrome Driver [Chrome Driver](https://googlechromelabs.github.io/chrome-for-testing/)。
@@ -118,6 +133,48 @@ debugger_address: localhost:9222/devtools/browser/4aab2b8b-112c-48a3-ba38-12baa1
 
 把service_location和debugger_address修改为你自己本机的配置。
 
+> 你也可以使用简单版本的 debugger_address: localhost:9222
+>
+> 我在windows环境下测试过是可以连接的。
+>
+> 在mac环境下有时可以连接，有时候不能连接，大家可以自行测试。
+
+## 使用firefox
+1. 下载并安装 [Firefox](https://www.mozilla.org/en-US/firefox/new/)。
+2. 下载[**geckodriver**](https://github.com/mozilla/geckodriver/releases) 驱动.下载与你的Firefox浏览器版本相对应的geckodriver。确保你下载的是与你的操作系统和Firefox版本相匹配的版本。
+
+3. 在firefox的启动命令之后加上： ` -marionette -start-debugger-server 2828`
+
+![image-20240504120509315](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405041205192.png)
+
+> 注意，这里的端口一定要是2828,不能自定义。
+
+这时候你如果打开firefox,就会看到导航栏变成了红色，表示你已经启动了远程调试模式。
+
+![image-20240504120607831](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405041206516.png)
+
+输入`about:config`
+
+可以看到marionette.port的端口就是2828。
+
+4. 修改配置文件
+
+修改config/common.yaml 里面的内容：
+
+```yaml
+# firefox driver地址
+service_location: "D:\\downloads\\geckodriver-v0.34.0-win32\\geckodriver.exe"
+```
+
+把driver_type修改为firefox。
+
+```python
+#driver_type: "chrome"
+driver_type: "firefox"
+```
+
+## 其他配置
+
 ```yaml
 enable:
   csdn: True
@@ -174,6 +231,7 @@ pip install -r requirements.txt
 
 [一键自动化博客发布工具,用过的人都说好(简书篇)](http://www.flydean.com/blog/projects/001-auto-blog-publish-tool-jianshu/)
 
+[一键自动化博客发布工具,chrome和firfox详细配置](http://www.flydean.com/blog/projects/002-auto-blog-publish-tool-chrome-firfox)
 
 
 
