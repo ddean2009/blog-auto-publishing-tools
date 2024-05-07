@@ -10,7 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-from utils.file_utils import read_file_with_footer
+from utils.file_utils import read_file_with_footer, parse_front_matter
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_cnblogs
 import time
 
@@ -18,6 +18,9 @@ import time
 def cnblogs_publisher(driver):
     cnblogs_config = read_cnblogs()
     common_config = read_common()
+    auto_publish = common_config['auto_publish']
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -29,7 +32,10 @@ def cnblogs_publisher(driver):
     # 文章标题
     title = driver.find_element(By.ID, 'post-title')
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待2秒
 
     # 文章内容
@@ -89,17 +95,24 @@ def cnblogs_publisher(driver):
     time.sleep(2)
 
     # 摘要
-    summary = common_config['summary']
+    if 'description' in front_matter['description'] and front_matter['description']:
+        summary = front_matter['description']
+    else:
+        summary = common_config['summary']
     summary_item = driver.find_element(By.ID, 'summary')
     summary_item.send_keys(summary)
     time.sleep(2)
 
     # tag标签
-    tags = cnblogs_config['tags']
-    if tags:
+    tag_list = []
+    if 'tags' in front_matter and front_matter['tags']:
+        tag_list = front_matter['tags']
+    else:
+        tag_list = cnblogs_config['tags']
+    if tag_list:
         tag_item = driver.find_element(By.ID, 'tags')
         tag_item.click()
-        for tag in tags:
+        for tag in tag_list:
             tag_input = tag_item.find_element(By.TAG_NAME, 'input')
             tag_input.send_keys(tag)
             time.sleep(1)
@@ -107,6 +120,7 @@ def cnblogs_publisher(driver):
     time.sleep(2)
 
     # 提交文章
-    submit_button = driver.find_element(By.XPATH, '//button[@data-el-locator="publishBtn"]')
-    # submit_button.click()
+    if auto_publish:
+        submit_button = driver.find_element(By.XPATH, '//button[@data-el-locator="publishBtn"]')
+        submit_button.click()
 

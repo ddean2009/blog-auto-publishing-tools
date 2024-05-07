@@ -1,11 +1,11 @@
 site: https://i.cnblogs.com/posts/edit
 # 个人分类  工具技巧 AIGC
 categories:
-  - AIGC
+  - 工具技巧
 
 # 添加到合集: 工具技巧 AIGC
 collections:
-  - AIGC
+  - 工具技巧
 
 # 投顾网站分类ID:
   # 后端开发：Java,Python,
