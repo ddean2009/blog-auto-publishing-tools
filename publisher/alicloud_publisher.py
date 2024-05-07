@@ -57,8 +57,8 @@ def alicloud_publisher(driver):
     # 子社区
     # TODO
 
-    # 上传图片
-    # TODO
+    # 设置封面
+    # TODO 阿里云不支持input标签
 
     # 发布
     if auto_publish:
