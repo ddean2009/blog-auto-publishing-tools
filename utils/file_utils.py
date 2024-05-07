@@ -65,6 +65,7 @@ def read_file(file):
         # 读取文件内容
         content = file.read()
         cleaned_content = remove_front_matter(content)
+        cleaned_content = remove_truncate_content(cleaned_content)
         return cleaned_content
 
 
@@ -72,7 +73,8 @@ def read_file_all_content(file):
     with open(file, 'r', encoding='UTF-8') as file:
         # 读取文件内容
         content = file.read()
-        return content
+        cleaned_content = remove_truncate_content(content)
+        return cleaned_content
 
 
 def read_file_with_footer(file):
@@ -80,6 +82,7 @@ def read_file_with_footer(file):
         # 读取文件内容
         content = file.read()
         cleaned_content = remove_front_matter(content)
+        cleaned_content = remove_truncate_content(cleaned_content)
         common_config = read_common()
         if common_config['include_footer']:
             current_dir = os.getcwd()
@@ -95,6 +98,10 @@ def remove_front_matter(markdown_content):
     cleaned_content = re.sub(front_matter_pattern, '', markdown_content, flags=re.MULTILINE)
     return cleaned_content
 
+def remove_truncate_content(content):
+    # 删除blog中的  <!-- truncate --> 标签
+    cleaned_content = content.replace("<!-- truncate -->", "")
+    return cleaned_content
 
 # 解析markdown中的front matter的内容
 def parse_front_matter(content_file):
