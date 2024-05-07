@@ -98,10 +98,12 @@ def remove_front_matter(markdown_content):
     cleaned_content = re.sub(front_matter_pattern, '', markdown_content, flags=re.MULTILINE)
     return cleaned_content
 
+
 def remove_truncate_content(content):
     # 删除blog中的  <!-- truncate --> 标签
     cleaned_content = content.replace("<!-- truncate -->", "")
     return cleaned_content
+
 
 # 解析markdown中的front matter的内容
 def parse_front_matter(content_file):
@@ -138,7 +140,8 @@ def convert_md_to_html(md_filename):
     pandoc_css_path = os.path.join(script_dir, 'pandoc.css')
 
     # 构造pandoc命令
-    command = ['pandoc --standalone  --css', pandoc_css_path, '-f markdown -t html5 --no-highlight', md_filename, '-o',
+    command = ['pandoc', '--standalone', '--css', pandoc_css_path, '-f', 'markdown', '-t', 'html5', '--no-highlight',
+               md_filename, '-o',
                html_filename]
 
     # 调用系统命令
