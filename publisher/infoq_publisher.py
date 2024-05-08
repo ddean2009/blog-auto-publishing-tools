@@ -10,7 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-from utils.file_utils import read_file_with_footer
+from utils.file_utils import read_file_with_footer, parse_front_matter, download_image
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
     read_infoq
 import time
@@ -19,6 +19,10 @@ import time
 def infoq_publisher(driver):
     infoq_config = read_infoq()
     common_config = read_common()
+
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
+    auto_publish = common_config['auto_publish']
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -35,12 +39,19 @@ def infoq_publisher(driver):
     driver.switch_to.window(driver.window_handles[-1])
 
     # 上传封面
-    # TODO
+    if 'image' in front_matter and front_matter['image']:
+        file_input = driver.find_element(By.XPATH, "//input[@type='file']")
+        # 文件上传不支持远程文件上传，所以需要把图片下载到本地
+        file_input.send_keys(download_image(front_matter['image']))
+        time.sleep(2)
 
     # 文章标题
     title = driver.find_element(By.XPATH, '//input[@placeholder="请输入标题"]')
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
     # 文章内容 markdown版本
@@ -65,7 +76,10 @@ def infoq_publisher(driver):
     time.sleep(2)
 
     # 摘要
-    summary = common_config['summary']
+    if 'description' in front_matter['description'] and front_matter['description']:
+        summary = front_matter['description']
+    else:
+        summary = common_config['summary']
     if summary:
         summary_input = driver.find_element(By.XPATH, '//div[@class="summary"]/textarea')
         summary_input.clear()
@@ -82,8 +96,9 @@ def infoq_publisher(driver):
             tag_input.send_keys(Keys.ENTER)
 
     # 发布
-    publish_button = driver.find_element(By.XPATH, '//div[@class="dialog-footer-buttons"]/div[contains(text(),"确定")]')
-    # publish_button.click()
+    if auto_publish:
+        publish_button = driver.find_element(By.XPATH, '//div[@class="dialog-footer-buttons"]/div[contains(text(),"确定")]')
+        publish_button.click()
 
 
 

@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 
-from utils.file_utils import read_file_with_footer
+from utils.file_utils import read_file_with_footer, parse_front_matter
 from utils.yaml_file_utils import read_jianshu, read_common
 import time
 
@@ -12,6 +12,9 @@ import time
 def jianshu_publisher(driver):
     jianshu_config = read_jianshu()
     common_config = read_common()
+
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
 
     auto_publish = common_config['auto_publish']
 
@@ -69,7 +72,10 @@ def jianshu_publisher(driver):
     # 文章标题
     title = driver.find_element(locate_with(By.TAG_NAME, "input").above({By.ID: "arthur-editor"}))
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
     if auto_publish:
