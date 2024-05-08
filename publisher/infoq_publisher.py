@@ -87,7 +87,10 @@ def infoq_publisher(driver):
     time.sleep(2)
 
     # 标签
-    tags = infoq_config['tags']
+    if 'tags' in front_matter and front_matter['tags']:
+        tags = front_matter['tags']
+    else:
+        tags = infoq_config['tags']
     if tags:
         for tag in tags:
             tag_input = driver.find_element(By.XPATH, '//div[@class="search-tag"]//input')

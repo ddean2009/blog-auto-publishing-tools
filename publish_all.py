@@ -79,54 +79,19 @@ def publish_to_all_platforms(driver):
     driver.quit()
 
 
-# # 发布csdn
-# if common_config['enable']['csdn']:
-#     publish_to_platform('csdn', driver)
-#
-# # 发布简书
-# if common_config['enable']['jianshu']:
-#     publish_to_platform('jianshu', driver)
-#
-# # 发布掘金
-# if common_config['enable']['juejin']:
-#     publish_to_platform('juejin', driver)
-#
-# # 发布segmentfault
-# if common_config['enable']['segmentfault']:
-#     publish_to_platform('segmentfault', driver)
-#
-# # oschina
-# if common_config['enable']['oschina']:
-#     publish_to_platform('oschina', driver)
-#
-# # cnblogs
-# if common_config['enable']['cnblogs']:
-#     publish_to_platform('cnblogs', driver)
-#
-# # zhihu
-# if common_config['enable']['zhihu']:
-#     publish_to_platform('zhihu', driver)
-#
-# # 51cto
-# if common_config['enable']['cto51']:
-#     publish_to_platform('cto51', driver)
-#
-# # infoq
-# if common_config['enable']['infoq']:
-#     publish_to_platform('infoq', driver)
-#
-# # txcloud
-# if common_config['enable']['txcloud']:
-#     publish_to_platform('txcloud', driver)
-#
-# # alicloud
-# if common_config['enable']['alicloud']:
-#     publish_to_platform('alicloud', driver)
-#
-# # toutiao
-# if common_config['enable']['toutiao']:
-#     publish_to_platform('toutiao', driver)
+
 
 if __name__ == '__main__':
-    publish_to_all_platforms(driver)
-    # publish_to_platform('zhihu', driver)
+    # publish_to_all_platforms(driver)
+    # publish_to_platform('csdn', driver)
+    publish_to_platform('jianshu', driver)
+    publish_to_platform('juejin', driver)
+    publish_to_platform('segmentfault', driver)
+    publish_to_platform('oschina', driver)
+    publish_to_platform('cnblogs', driver)
+    publish_to_platform('zhihu', driver)
+    publish_to_platform('cto51', driver)
+    publish_to_platform('infoq', driver)
+    publish_to_platform('txcloud', driver)
+    publish_to_platform('alicloud', driver)
+    publish_to_platform('toutiao', driver)

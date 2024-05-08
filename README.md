@@ -73,13 +73,19 @@ TODO
 ## 使用chrome 
 
 1. 下载并安装 [Chrome](https://www.google.com/chrome/)。
-2. 下载chrome Driver [Chrome Driver](https://googlechromelabs.github.io/chrome-for-testing/)。
+2. 下载chrome Driver [Chrome Driver](https://googlechromelabs.github.io/chrome-for-testing/)。(可以从这里下载chrome for testing版本，专门用来自动化测试。)
 3. chrome 以debug模式启动
 
 如果是mac电脑，那么可以先给chrome设置一个alias
 
 ```bash
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+```
+
+如果你是google chrome for testing版本，那么可以这样设置：
+
+```bash
+alias chrome="/Applications/Google\ Chrome\ for\ Testing.app/Contents/MacOS/Google\ Chrome\ for\ Testing"
 ```
 以debug模式启动
 
@@ -138,7 +144,7 @@ debugger_address: localhost:9222/devtools/browser/4aab2b8b-112c-48a3-ba38-12baa1
 >
 > 我在windows环境下测试过是可以连接的。
 >
-> 在mac环境下有时可以连接，有时候不能连接，大家可以自行测试。
+> 在mac环境下有时可以连接，有时候不能连接，大家可以自行测试。(如果连不上，可以下载chrome for testing版本)
 
 ## 使用firefox
 1. 下载并安装 [Firefox](https://www.mozilla.org/en-US/firefox/new/)。
@@ -147,6 +153,13 @@ debugger_address: localhost:9222/devtools/browser/4aab2b8b-112c-48a3-ba38-12baa1
 3. 在firefox的启动命令之后加上： ` -marionette -start-debugger-server 2828`
 
 ![image-20240504120509315](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405041205192.png)
+
+如果你是mac，那么可以执行下面的命令：
+
+```bash
+alias firfox=/Applications/Firefox.app/Contents/MacOS/firefox
+firfox  -marionette -start-debugger-server 2828
+```
 
 > 注意，这里的端口一定要是2828,不能自定义。
 

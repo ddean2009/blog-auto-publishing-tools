@@ -10,7 +10,7 @@ categories:
   - 程序那些事
   - AIGC
 
-# 可见范围 public, private,needfans,needvip
-visibility: needfans
+# 可见范围 全部可见, 仅我可见,粉丝可见,VIP可见
+visibility: 粉丝可见
 
 

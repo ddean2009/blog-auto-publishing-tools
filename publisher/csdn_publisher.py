@@ -10,7 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-from utils.file_utils import read_file_with_footer
+from utils.file_utils import read_file_with_footer, parse_front_matter, download_image
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
     read_infoq, read_txcloud, read_csdn
 import time
@@ -19,6 +19,9 @@ import time
 def csdn_publisher(driver):
     csdn_config = read_csdn()
     common_config = read_common()
+    auto_publish = common_config['auto_publish']
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -31,7 +34,10 @@ def csdn_publisher(driver):
     # 文章标题
     title = driver.find_element(By.XPATH, '//div[contains(@class,"article-bar")]//input[contains(@placeholder,"请输入文章标题")]')
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
     # 文章内容 markdown版本
@@ -54,7 +60,10 @@ def csdn_publisher(driver):
     time.sleep(2)
 
     # 文章标签
-    tags = csdn_config['tags']
+    if 'tags' in front_matter and front_matter['tags']:
+        tags = front_matter['tags']
+    else:
+        tags = csdn_config['tags']
     if tags:
         add_tag = driver.find_element(By.XPATH,
                                         '//div[@class="mark_selection"]//button[@class="tag__btn-tag" and contains(text(),"添加文章标签")]')
@@ -73,10 +82,17 @@ def csdn_publisher(driver):
         time.sleep(1)
 
     # 文章封面
-    # TODO
+    if 'image' in front_matter and front_matter['image']:
+        file_input = driver.find_element(By.XPATH, "//input[@class='el-upload__input' and @type='file']")
+        # 文件上传不支持远程文件上传，所以需要把图片下载到本地
+        file_input.send_keys(download_image(front_matter['image']))
+        time.sleep(2)
 
     # 摘要
-    summary = common_config['summary']
+    if 'description' in front_matter['description'] and front_matter['description']:
+        summary = front_matter['description']
+    else:
+        summary = common_config['summary']
     if summary:
         summary_input = driver.find_element(By.XPATH, '//div[@class="desc-box"]//textarea[contains(@placeholder,"摘要：会在推荐、列表等场景外露")]')
         summary_input.send_keys(summary)
@@ -85,17 +101,27 @@ def csdn_publisher(driver):
     # 分类专栏
     categories = csdn_config['categories']
     if categories:
+        # 先点击新建分类专栏
+        add_category = driver.find_element(By.XPATH, '//div[@id="tagList"]//button[@class="tag__btn-tag" and contains(text(),"新建分类专栏")]')
+        add_category.click()
+        time.sleep(1)
         for category in categories:
             category_input = driver.find_element(By.XPATH, f'//input[@type="checkbox" and @value="{category}"]/..')
             category_input.click()
             time.sleep(1)
+        # 点击关闭按钮
+        close_button = driver.find_element(By.XPATH, '//div[@class="tag__options-content"]//button[@class="modal__close-button button" and @title="关闭"]')
+        close_button.click()
+        time.sleep(1)
 
     # 可见范围
     visibility = csdn_config['visibility']
     if visibility:
-        visibility_input = driver.find_element(By.ID, visibility)
-        visibility_input.click()
+        visibility_input = driver.find_element(By.XPATH,f'//div[@class="switch-box"]//label[contains(text(),"{visibility}")]')
+        parent_element = visibility_input.find_element(By.XPATH, '..')
+        parent_element.click()
 
     # 发布
-    publish_button = driver.find_element(By.XPATH, '//div[@class="modal__button-bar")]//button[contains(text(),"发布文章")]')
-    # publish_button.click()
+    if auto_publish:
+        publish_button = driver.find_element(By.XPATH, '//div[@class="modal__button-bar")]//button[contains(text(),"发布文章")]')
+        publish_button.click()

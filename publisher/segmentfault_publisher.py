@@ -62,7 +62,6 @@ def segmentfault_publisher(driver):
     tag_button = driver.find_element(By.ID, 'tags-toggle')
     tag_button.click()
     tag_input = driver.find_element(By.XPATH, '//input[@placeholder="搜索标签"]')
-    tag_list = []
     if 'tags' in front_matter and front_matter['tags']:
         tag_list = front_matter['tags']
     else:
