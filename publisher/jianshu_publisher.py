@@ -28,9 +28,6 @@ def jianshu_publisher(driver):
     # 设置等待
     wait = WebDriverWait(driver, 5)
 
-    # 存储原始窗口的 ID
-    # original_window = driver.current_window_handle
-
     # 写文章按钮
     write_btn = driver.find_element(By.CLASS_NAME, 'write-btn')
     write_btn.click()
