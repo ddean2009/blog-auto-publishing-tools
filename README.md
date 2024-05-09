@@ -254,7 +254,11 @@ pip install -r requirements.txt
 
 [一键自动化博客发布工具,用过的人都说好(oschina篇)](http://www.flydean.com/blog/projects/004-auto-blog-publish-tool-oschina)
 
+[一键自动化博客发布工具,用过的人都说好(阿里云篇)](https://www.flydean.com/blog/projects/005-auto-blog-publish-tool-alicloud)
 
+[一键自动化博客发布工具,用过的人都说好(infoq篇)](https://www.flydean.com/blog/projects/007-auto-blog-publish-tool-infoq)
+
+[一键自动化博客发布工具,用过的人都说好(cnblogs篇)](https://www.flydean.com/blog/projects/006-auto-blog-publish-tool-cnblogs)
 
 
 
