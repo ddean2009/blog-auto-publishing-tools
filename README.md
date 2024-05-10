@@ -240,7 +240,10 @@ pip install -r requirements.txt
 > 切记，在发布博客之前，一定要先保证你的账号是登录状态，否则无法发送博客。
 
 
+# 实例展示
 
+## 51cto
+<video height=240 width=427 src="resource/auto-blog-publish-tools-51cto.mp4"></video>
 
 
 # 系列教程

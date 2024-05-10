@@ -1,7 +1,7 @@
 import sys
 
 import pyperclip
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import wait
@@ -22,6 +22,8 @@ def oschina_publisher(driver):
 
     # 提取markdown文档的front matter内容：
     front_matter = parse_front_matter(common_config['content'])
+
+    # driver.switch_to.window(driver.window_handles[0])
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -65,8 +67,11 @@ def oschina_publisher(driver):
     if collection:
         category_select = driver.find_element(By.XPATH, '//div[contains(@class, "selection dropdown catalog-select")]')
         category_select.click()
-        select_element = category_select.find_element(By.XPATH, f'//div[contains(text(), "{collection}")]')
-        select_element.click()
+        time.sleep(1)
+        select_element = category_select.find_element(By.XPATH, f'//div[@class="item" and contains(text(), "{collection}")]')
+        ActionChains(driver).move_to_element(select_element).perform()
+        time.sleep(1)
+        ActionChains(driver).click(select_element).perform()
         time.sleep(2)
 
     # 推广专区
@@ -74,8 +79,11 @@ def oschina_publisher(driver):
     if topic:
         topic_select = driver.find_element(By.XPATH, '//div[contains(@class, "selection dropdown groups")]')
         topic_select.click()
-        topic_item = topic_select.find_element(By.XPATH, f'//div[contains(text(), "{topic}")]')
-        topic_item.click()
+        time.sleep(1)
+        topic_item = topic_select.find_element(By.XPATH, f'//div[@class="item" and contains(text(), "{topic}")]')
+        ActionChains(driver).move_to_element(topic_item).perform()
+        time.sleep(1)
+        ActionChains(driver).click(topic_item).perform()
         time.sleep(2)
 
 
