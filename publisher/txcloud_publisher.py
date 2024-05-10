@@ -25,6 +25,8 @@ def txcloud_publisher(driver):
 
     auto_publish = common_config['auto_publish']
 
+    # driver.switch_to.window(driver.window_handles[0])
+
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
 
@@ -77,12 +79,16 @@ def txcloud_publisher(driver):
     # 文章分类
     article_type = txcloud_config['article_type']
     if article_type:
-        article_type_select = driver.find_element(By.XPATH, '//section[@class="col-editor-sidebar publish"]//div[@class="tea-dropdown col-editor-classify is-expanded"]/div')
+        article_type_select = driver.find_element(By.XPATH, '//section[@class="col-editor-sidebar publish"]//div[@class="tea-dropdown col-editor-classify"]/div')
         article_type_select.click()
         time.sleep(1)
         article_type_element = driver.find_element(By.XPATH,f'//div[@class="tea-dropdown-box"]//ul//li//label//span[text()="{article_type}"]')
         article_type_element.click()
         time.sleep(1)
+    # 文章分类label
+    article_type_label = driver.find_element(By.XPATH, '//label[@class="c-f-list-tit" and text()="文章分类"]')
+    ActionChains(driver).click(article_type_label).perform()
+    time.sleep(1)
 
     # 文章标签
     if 'tags' in front_matter and front_matter['tags']:
@@ -102,9 +108,10 @@ def txcloud_publisher(driver):
     # 关键词
     keywords = txcloud_config['keywords']
     if keywords:
-        keyword_label = driver.find_element(By.XPATH, '//div[@class="com-2-tag-cont"]/label[contains(text(),"最多5个关键词")]')
-        keyword_input = keyword_label.find_element(By.XPATH, '../input[@class="com-2-tag-input"]')
         for keyword in keywords:
+            keyword_input = driver.find_element(By.XPATH,
+                                                '//div[@class="col-editor-key-input"]//div[@class="com-2-tag-cont"]/input[@class="com-2-tag-input"]')
+
             keyword_input.send_keys(keyword)
             time.sleep(1)
             keyword_input.send_keys(Keys.ENTER)
@@ -117,11 +124,11 @@ def txcloud_publisher(driver):
         zhuanlan_element.click()
 
     # 文章封面
-    if 'image' in front_matter and front_matter['image']:
-        file_input = driver.find_element(By.ID, "editor-upload-input")
-        # 文件上传不支持远程文件上传，所以需要把图片下载到本地
-        file_input.send_keys(download_image(front_matter['image']))
-        time.sleep(2)
+    # if 'image' in front_matter and front_matter['image']:
+    #     file_input = driver.find_element(By.ID, "editor-upload-input")
+    #     # 文件上传不支持远程文件上传，所以需要把图片下载到本地
+    #     file_input.send_keys(download_image(front_matter['image']))
+    #     time.sleep(2)
 
     # 发布
     if auto_publish:
