@@ -12,11 +12,11 @@ from utils.yaml_file_utils import read_common
 # 获取当前脚本的绝对路径
 script_path = os.path.abspath(__file__)
 
-print("当前脚本的绝对路径是:", script_path)
+# print("当前脚本的绝对路径是:", script_path)
 
 # 脚本所在的目录
 script_dir = os.path.dirname(script_path)
-print("脚本所在的目录是:", script_dir)
+# print("脚本所在的目录是:", script_dir)
 
 
 def list_all_files(video_dir, extension='.mp4'):

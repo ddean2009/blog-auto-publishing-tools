@@ -85,10 +85,12 @@ def juejin_publisher(driver):
     # 添加标签
     tag_btn = driver.find_element(By.XPATH, '//div[contains(@class,"byte-select__placeholder") and contains(text(), "请搜索添加标签")]')
     tag_btn.click()
-    if 'tags' in front_matter and front_matter['tags']:
-        tags = front_matter['tags']
-    else:
-        tags = juejin_config['tags']
+    # 掘金的标签跟普通标签不太一样，必须要存在的才可以，所以这里不用markdown文件中的通用标签
+    tags = juejin_config['tags']
+    # if 'tags' in front_matter and front_matter['tags']:
+    #     tags = front_matter['tags']
+    # else:
+    #     tags = juejin_config['tags']
     for tag in tags:
         # 使用复制粘贴的方式
         pyperclip.copy(tag)
@@ -97,9 +99,12 @@ def juejin_publisher(driver):
         # 回车
         # action_chains.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
         # 从下拉框中选择对应的tag
-        tag_element = driver.find_element(By.XPATH, f'//li[contains(@class,"byte-select-option") and contains(text(), "{tag}")]')
-        tag_element.click()
-        time.sleep(2)  # 等待3秒
+        try:
+            tag_element = driver.find_element(By.XPATH, f'//li[contains(@class,"byte-select-option") and contains(text(), "{tag}")]')
+            tag_element.click()
+            time.sleep(2)  # 等待3秒
+        except Exception as e:
+            print(f'没有找到标签：{tag}')
 
     title_label.click()
 
