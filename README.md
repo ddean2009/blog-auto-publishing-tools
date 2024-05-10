@@ -243,7 +243,7 @@ pip install -r requirements.txt
 # 实例展示
 
 ## 51cto
-<video height=240 width=427 src="resource/auto-blog-publish-tools-51cto.mp4"></video>
+<video height=240 width=427 src="https://github.com/ddean2009/blog-auto-publishing-tools/blob/main/resource/auto-blog-publish-tools-51cto.mp4"></video>
 
 
 # 系列教程
