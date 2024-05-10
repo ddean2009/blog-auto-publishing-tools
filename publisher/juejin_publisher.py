@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 
-from utils.file_utils import read_file_with_footer
+from utils.file_utils import read_file_with_footer, parse_front_matter, download_image
 from utils.yaml_file_utils import read_jianshu, read_common, read_juejin
 import time
 
@@ -18,6 +18,11 @@ import time
 def juejin_publisher(driver):
     juejin_config = read_juejin()
     common_config = read_common()
+
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
+
+    auto_publish = common_config['auto_publish']
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -56,7 +61,10 @@ def juejin_publisher(driver):
     # 文章标题
     title = driver.find_element(By.XPATH, '//input[@placeholder="输入文章标题..."]')
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
     # 发布按钮
@@ -70,16 +78,17 @@ def juejin_publisher(driver):
     # 分类
     category = juejin_config['category']
     if category:
-        # print(category)
         category_btn = driver.find_element(By.XPATH, f'//div[@class="form-item-content category-list"]//div[contains(text(), "{category}")]')
-        # print(category_btn.get_attribute("innerHTML"))
         category_btn.click()
         time.sleep(2)
 
     # 添加标签
     tag_btn = driver.find_element(By.XPATH, '//div[contains(@class,"byte-select__placeholder") and contains(text(), "请搜索添加标签")]')
     tag_btn.click()
-    tags = juejin_config['tags']
+    if 'tags' in front_matter and front_matter['tags']:
+        tags = front_matter['tags']
+    else:
+        tags = juejin_config['tags']
     for tag in tags:
         # 使用复制粘贴的方式
         pyperclip.copy(tag)
@@ -95,7 +104,11 @@ def juejin_publisher(driver):
     title_label.click()
 
     # 文章封面
-    # TODO
+    if 'image' in front_matter and front_matter['image']:
+        file_input = driver.find_element(By.XPATH, "//input[@type='file']")
+        # 文件上传不支持远程文件上传，所以需要把图片下载到本地
+        file_input.send_keys(download_image(front_matter['image']))
+        time.sleep(2)
 
     # 收录至专栏
     collections = juejin_config['collections']
@@ -132,7 +145,10 @@ def juejin_publisher(driver):
     title_label.click()
 
     # 编辑摘要
-    summary = common_config['summary']
+    if 'description' in front_matter['description'] and front_matter['description']:
+        summary = front_matter['description']
+    else:
+        summary = common_config['summary']
     if summary:
         summary_ui = driver.find_element(By.XPATH, '//textarea[@class="byte-input__textarea"]')
         summary_ui.clear()
@@ -140,6 +156,7 @@ def juejin_publisher(driver):
         time.sleep(2)  # 等待3秒
 
     # 最终发布
-    publish_button = driver.find_element(By.XPATH, '//button[contains(text(), "确定并发布")]')
-    # publish_button.click()
+    if auto_publish:
+        publish_button = driver.find_element(By.XPATH, '//button[contains(text(), "确定并发布")]')
+        publish_button.click()
 

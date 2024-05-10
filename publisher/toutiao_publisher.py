@@ -10,7 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-from utils.file_utils import read_file_with_footer, convert_md_to_html, read_file
+from utils.file_utils import read_file_with_footer, convert_md_to_html, read_file, parse_front_matter
 from utils.selenium_utils import get_html_web_content
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
     read_infoq, read_txcloud, read_alcloud, read_toutiao
@@ -21,6 +21,11 @@ def toutiao_publisher(driver):
     toutiao_config = read_toutiao()
     common_config = read_common()
 
+    # 提取markdown文档的front matter内容：
+    front_matter = parse_front_matter(common_config['content'])
+
+    auto_publish = common_config['auto_publish']
+
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
     # 浏览器实例现在可以被重用，进行你的自动化操作
@@ -30,7 +35,10 @@ def toutiao_publisher(driver):
     # 文章标题
     title = driver.find_element(By.XPATH, '//div[@class="publish-editor-title-inner"]//textarea[contains(@placeholder,"请输入文章标题")]')
     title.clear()
-    title.send_keys(common_config['title'])
+    if 'title' in front_matter['title'] and front_matter['title']:
+        title.send_keys(front_matter['title'])
+    else:
+        title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
 
     # 文章内容 html版本
@@ -62,7 +70,10 @@ def toutiao_publisher(driver):
     # TODO
 
     # 摘要
-    summary = common_config['summary']
+    if 'description' in front_matter['description'] and front_matter['description']:
+        summary = front_matter['description']
+    else:
+        summary = common_config['summary']
     if summary:
         summary_input = driver.find_element(By.XPATH, '//div[@class="multi-abstract-cell-content-input"]//textarea[contains(@placeholder,"好的摘要比标题更吸引读者")]')
         summary_input.send_keys(summary)
@@ -80,5 +91,6 @@ def toutiao_publisher(driver):
     # TODO
 
     # 发布
-    # publish_button = driver.find_element(By.XPATH, '//div[contains(@class,"publish-btn-last")]')
-    # publish_button.click()
+    if auto_publish:
+        publish_button = driver.find_element(By.XPATH, '//div[contains(@class,"publish-btn-last")]')
+        publish_button.click()

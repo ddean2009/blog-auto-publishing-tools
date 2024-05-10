@@ -1,5 +1,8 @@
 site: https://cloud.tencent.com/developer/article/write
 
+# 文章分类
+article_type: 开发工具
+
 tags:
   - 人工智能
   - AIGC
@@ -10,3 +13,6 @@ keywords:
   - AIGC
   - OpenAI
   - 程序那些事
+
+# 专栏
+zhuanlan: 程序那些事

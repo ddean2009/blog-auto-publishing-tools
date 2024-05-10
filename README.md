@@ -189,6 +189,9 @@ driver_type: "firefox"
 
 ## 设置封面
 
+文章的封面图片是在markdown博客文件的yaml front matter中设置的。如下所示：
+
+![image-20240507154807745](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405071548984.png)
 
 ## 其他配置
 
