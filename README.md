@@ -242,8 +242,16 @@ pip install -r requirements.txt
 
 # 实例展示
 
-## 51cto
-<video height=120 width=214 style="object-fit:fill" src="https://github.com/ddean2009/blog-auto-publishing-tools/assets/13955545/9e7e64b6-6dfa-424f-9f0a-d1099fd38288"></video>
+<table>
+<thead>
+<tr>
+<th align="center">51cto</th>
+</tr>
+</thead>
+<tr>
+<td align="center"><video  src="https://github.com/ddean2009/blog-auto-publishing-tools/assets/13955545/9e7e64b6-6dfa-424f-9f0a-d1099fd38288"></video></td>
+</tr>
+</table>
 
 
 # 系列教程
