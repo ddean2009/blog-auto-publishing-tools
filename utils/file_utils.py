@@ -124,13 +124,13 @@ def parse_front_matter(content_file):
     return metadata
 
 
-def convert_md_to_html(md_filename):
+def convert_md_to_html(md_filename, include_footer=True):
     # 获取文件名（不包含扩展名）和目录
     base_name = os.path.splitext(md_filename)[0]
     directory = os.path.dirname(md_filename)
 
     # 构建输出的HTML文件名
-    html_filename = os.path.join(directory, base_name + '.html')
+    html_filename = os.path.join(directory, base_name + str(include_footer)+'.html')
 
     # 如果HTML文件已经存在，直接返回
     if os.path.exists(html_filename):
@@ -148,17 +148,18 @@ def convert_md_to_html(md_filename):
     subprocess.run(command)
 
     common_config = read_common()
-    if common_config['include_footer']:
-        current_dir = os.getcwd()
-        footer = os.path.join(current_dir, 'config/footer.html')
+    if include_footer:
+        if common_config['include_footer']:
+            current_dir = os.getcwd()
+            footer = os.path.join(current_dir, 'config/footer.html')
 
-    # 把footer合并到html中
-    # 打开两个文件：一个用于读取，另一个用于写入
-    with open(footer, 'r') as source_file, open(html_filename, 'a') as destination_file:
-        # 读取源文件的内容
-        source_content = source_file.read()
-        # 将读取的内容追加到目标文件的末尾
-        destination_file.write(source_content)
+            # 把footer合并到html中
+            # 打开两个文件：一个用于读取，另一个用于写入
+            with open(footer, 'r') as source_file, open(html_filename, 'a') as destination_file:
+                # 读取源文件的内容
+                source_content = source_file.read()
+                # 将读取的内容追加到目标文件的末尾
+                destination_file.write(source_content)
 
     # 返回转换后的HTML文件名
     return html_filename

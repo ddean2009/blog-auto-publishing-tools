@@ -15,6 +15,7 @@ from publisher.txcloud_publisher import txcloud_publisher
 from publisher.zhihu_publisher import zhihu_publisher
 from publisher.jianshu_publisher import jianshu_publisher
 from publisher.juejin_publisher import juejin_publisher
+from publisher.mpweixin_publisher import mpweixin_publisher
 from utils.yaml_file_utils import read_common
 
 common_config = read_common()
@@ -53,7 +54,8 @@ all_sites = ['csdn',
              'infoq',
              'txcloud',
              'alicloud',
-             'toutiao']
+             'toutiao',
+             'mpweixin']
 
 
 def publish_to_platform(platform, driver):
@@ -95,3 +97,4 @@ if __name__ == '__main__':
     # publish_to_platform('txcloud', driver)
     # publish_to_platform('alicloud', driver)
     # publish_to_platform('toutiao', driver)
+    # publish_to_platform('mpweixin', driver)

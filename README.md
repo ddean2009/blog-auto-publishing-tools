@@ -30,6 +30,10 @@
 
 只需要编写好Markdown格式的博客即可，同时能够根据各平台的规则自动调整格式，确保内容在不同平台上的展示效果一致。
 
+# 更新列表
+* 2024-05-19 增加对公众号平台的支持
+* 2024-05-18 知乎平台优化
+
 # 功能列表
 
 目前支持从浏览器自动发布博客。
@@ -247,7 +251,7 @@ pip install -r requirements.txt
 <tr>
 <th align="center">51cto</th>
 <th align="center">infoq</th>
-<th align="center">txcloud</th>
+<th align="center">腾讯云</th>
 </tr>
 </thead>
 <tr>
@@ -269,6 +273,12 @@ pip install -r requirements.txt
 <td align="center"><video src="https://github.com/ddean2009/blog-auto-publishing-tools/assets/13955545/34f5d603-0779-42c7-8a82-3a7985af0293"></video></td>
 </tr>
 </table>
+
+# 加入讨论组
+
+如果你对这个工具有什么问题，欢迎加入讨论组
+
+![博客自动发布工具讨论组](group.jpg)
 
 
 # 系列教程

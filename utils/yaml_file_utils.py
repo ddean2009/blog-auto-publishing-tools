@@ -128,6 +128,10 @@ def read_oschina():
     current_dir = os.getcwd()
     return read_yaml(os.path.join(current_dir, 'config/oschina.yaml'))
 
+def read_mpweixin():
+    current_dir = os.getcwd()
+    return read_yaml(os.path.join(current_dir, 'config/mpweixin.yaml'))
+
 
 def read_cnblogs():
     current_dir = os.getcwd()
