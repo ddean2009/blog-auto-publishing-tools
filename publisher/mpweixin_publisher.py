@@ -111,7 +111,6 @@ def mpweixin_publisher(driver):
         ActionChains(driver).move_to_element(tag_button).perform()
         time.sleep(1)
         ActionChains(driver).click(tag_button).perform()
-        # tag_button.click()
         time.sleep(1)
         # 输入标签
         tag_input = driver.find_element(By.XPATH,
