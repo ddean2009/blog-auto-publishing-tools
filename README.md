@@ -309,6 +309,20 @@ linux下面执行： setup.sh
 
 [一键自动化博客发布工具,用过的人都说好(cnblogs篇)](https://www.flydean.com/blog/projects/006-auto-blog-publish-tool-cnblogs)
 
+[一键自动化博客发布工具,用过的人都说好(csdn篇)](https://www.flydean.com/blog/projects/008-auto-blog-publish-tool-csdn)
+
+[一键自动化博客发布工具,用过的人都说好(51cto篇)](https://www.flydean.com/blog/projects/009-auto-blog-publish-tool-51cto)
+
+[一键自动化博客发布工具,用过的人都说好(掘金篇)](https://www.flydean.com/blog/projects/010-auto-blog-publish-tool-juejin)
+
+[一键自动化博客发布工具,用过的人都说好(公众号篇)](https://www.flydean.com/blog/projects/014-auto-blog-publish-tool-mpweixin)
+
+[一键自动化博客发布工具,用过的人都说好(知乎篇)](https://www.flydean.com/blog/projects/013-auto-blog-publish-tool-zhihu)
+
+[一键自动化博客发布工具,用过的人都说好(头条篇)](https://www.flydean.com/blog/projects/012-auto-blog-publish-tool-toutiao)
+
+[一键自动化博客发布工具,用过的人都说好(腾讯云篇)](https://www.flydean.com/blog/projects/011-auto-blog-publish-tool-txcloud)
+
 
 
 
