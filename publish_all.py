@@ -84,17 +84,71 @@ def publish_to_all_platforms(driver):
 
 
 if __name__ == '__main__':
-    publish_to_all_platforms(driver)
-    # publish_to_platform('csdn', driver)
-    # publish_to_platform('jianshu', driver)
-    # publish_to_platform('juejin', driver)
-    # publish_to_platform('segmentfault', driver)
-    # publish_to_platform('oschina', driver)
-    # publish_to_platform('cnblogs', driver)
-    # publish_to_platform('zhihu', driver)
-    # publish_to_platform('cto51', driver)
-    # publish_to_platform('infoq', driver)
-    # publish_to_platform('txcloud', driver)
-    # publish_to_platform('alicloud', driver)
-    # publish_to_platform('toutiao', driver)
-    # publish_to_platform('mpweixin', driver)
+    while True:
+        print("选择你要发布的平台:\n")
+        print("1. 全部")
+        print("2. csdn")
+        print("3. jianshu")
+        print("4. juejin")
+        print("5. segmentfault")
+        print("6. oschina")
+        print("7. cnblogs")
+        print("8. zhihu")
+        print("9. cto51")
+        print("10. infoq")
+        print("11. txcloud")
+        print("12. alicloud")
+        print("13. toutiao")
+        print("14. mpweixin")
+        print("0. 退出")
+
+        choice = input("\n请选择: ")
+        print("")
+
+        if choice == '1':
+            publish_to_all_platforms(driver)
+
+        elif choice == '2':
+            publish_to_platform('csdn', driver)
+
+        elif choice == '3':
+            publish_to_platform('jianshu', driver)
+
+        elif choice == '4':
+            publish_to_platform('juejin', driver)
+
+        elif choice == '5':
+            publish_to_platform('segmentfault', driver)
+
+        elif choice == '6':
+            publish_to_platform('oschina', driver)
+
+        elif choice == '7':
+            publish_to_platform('cnblogs', driver)
+
+        elif choice == '8':
+            publish_to_platform('zhihu', driver)
+
+        elif choice == '9':
+            publish_to_platform('cto51', driver)
+
+        elif choice == '10':
+            publish_to_platform('infoq', driver)
+
+        elif choice == '11':
+            publish_to_platform('txcloud', driver)
+
+        elif choice == '12':
+            publish_to_platform('alicloud', driver)
+
+        elif choice == '13':
+            publish_to_platform('toutiao', driver)
+
+        elif choice == '14':
+            publish_to_platform('mpweixin', driver)
+
+        elif choice == '0':
+            break
+
+        else:
+            print("无效的输入，请重新输入。")
