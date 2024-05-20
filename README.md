@@ -31,6 +31,7 @@
 只需要编写好Markdown格式的博客即可，同时能够根据各平台的规则自动调整格式，确保内容在不同平台上的展示效果一致。
 
 # 更新列表
+* 2024-05-20 添加了自动设置环境脚本，自动运行发布脚本。这样就不用打开python开发工具，通过运行publish.bat 或者publish.sh即可自动发布啦。
 * 2024-05-19 增加对公众号平台的支持
 * 2024-05-18 知乎平台优化
 
@@ -150,6 +151,7 @@ debugger_address: localhost:9222/devtools/browser/4aab2b8b-112c-48a3-ba38-12baa1
 > 我在windows环境下测试过是可以连接的。
 >
 > 在mac环境下有时可以连接，有时候不能连接，大家可以自行测试。(如果连不上，可以下载chrome for testing版本)
+> 如果还是有问题，联系我，我告诉你为啥连不上:-) 
 
 ## 使用firefox
 1. 下载并安装 [Firefox](https://www.mozilla.org/en-US/firefox/new/)。
@@ -232,15 +234,20 @@ enable:
 pip install -r requirements.txt 
 ```
 
+或者使用我自己做的安装脚本：
+
+windows下面执行： setup.bat 
+linux下面执行： setup.sh
+
 本工具使用了pandoc  https://www.pandoc.org/  来进行markdown 到html的转化。
 
 有些博客平台不支持markdown格式，所以需要安装pandoc。
 
 如果你的博客平台支持markdown的，可以不需要这个工具。
 
-运行open_all.py 可以自动打开所有的博客网站。
+运行open.bat 或者open.sh 可以自动打开所有的博客网站。
 
-运行publish_all.py 可以自动发布博客内容。
+运行publish.bat 或者publish.sh 可以自动发布博客内容。
 
 > 切记，在发布博客之前，一定要先保证你的账号是登录状态，否则无法发送博客。
 

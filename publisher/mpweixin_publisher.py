@@ -34,7 +34,8 @@ def mpweixin_publisher(driver):
     time.sleep(2)  # 等待2秒
 
     # 点击图文消息
-    pic_and_article_button = driver.find_element(By.XPATH, '//div[@class="new-creation__menu-item"]//div[@class="new-creation__menu-title" and contains(text(), "图文消息")]')
+    pic_and_article_button = driver.find_element(By.XPATH,
+                                                 '//div[@class="new-creation__menu-item"]//div[@class="new-creation__menu-title" and contains(text(), "图文消息")]')
     pic_and_article_button.click()
     time.sleep(1)
 
@@ -89,7 +90,8 @@ def mpweixin_publisher(driver):
         original_statement.click()
         time.sleep(2)
         ## 点击确认按钮
-        confirm_button = driver.find_element(By.XPATH, '//div[@class="weui-desktop-dialog"]//div[@class="weui-desktop-btn_wrp"]//button[contains(text(), "确定")]')
+        confirm_button = driver.find_element(By.XPATH,
+                                             '//div[@class="weui-desktop-dialog"]//div[@class="weui-desktop-btn_wrp"]//button[contains(text(), "确定")]')
         confirm_button.click()
         time.sleep(1)
         # 赞赏
@@ -97,7 +99,8 @@ def mpweixin_publisher(driver):
         zhanshang_button.click()
         time.sleep(1)
         ## 点击确认按钮
-        confirm_button = driver.find_element(By.XPATH, '//div[@class="reward-setting-dialog__footer"]//div[@class="weui-desktop-btn_wrp"]//button[contains(text(), "确定")]')
+        confirm_button = driver.find_element(By.XPATH,
+                                             '//div[@class="reward-setting-dialog__footer"]//div[@class="weui-desktop-btn_wrp"]//button[contains(text(), "确定")]')
         confirm_button.click()
         time.sleep(1)
 
@@ -107,7 +110,10 @@ def mpweixin_publisher(driver):
     else:
         tags = mpweixin_config['tags']
     if tags:
-        tag_button = driver.find_element(By.XPATH, '//div[@id="js_article_tags_area"]//div[contains(@class,"js_article_tags_label")]/span[text()="未添加"]')
+        tag_button = driver.find_element(By.XPATH,
+                                         '//div[@id="js_article_tags_area"]//div[contains(@class,"js_article_tags_label")]/span[text()="未添加"]')
+        ActionChains(driver).scroll_by_amount(0, 400).perform()
+        time.sleep(1)
         ActionChains(driver).move_to_element(tag_button).perform()
         time.sleep(1)
         ActionChains(driver).click(tag_button).perform()
@@ -121,10 +127,10 @@ def mpweixin_publisher(driver):
             tag_input.send_keys(Keys.ENTER)
             time.sleep(1)
         # 点击确定按钮
-        confirm_button = driver.find_element(By.XPATH, '//div[@class="weui-desktop-btn_wrp"]//button[contains(text(), "确定")]')
+        confirm_button = driver.find_element(By.XPATH,
+                                             '//div[@class="weui-desktop-btn_wrp"]//button[contains(text(), "确定")]')
         confirm_button.click()
         time.sleep(1)
-
 
     # 原文链接
     # TODO  感觉你们应该不需要这个功能

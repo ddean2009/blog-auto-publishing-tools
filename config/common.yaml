@@ -1,8 +1,12 @@
 # chrome driver地址
-service_location: /Users/wayne/Downloads/work/chromedriver-mac-arm64/chromedriver
+#service_location: /Users/wayne/Downloads/work/chromedriver-mac-arm64/chromedriver
+service_location: /Users/wayne/Downloads/work/chromedriver-mac-arm64-156/chromedriver
+#service_location: /Users/wayne/Downloads/work/firefoxdriver/geckodriver
 # chrome调试地址
-debugger_address: 127.0.0.1:9222/devtools/browser/5aa23436-89ba-4516-96e9-d2e8bb8185f2
-#debugger_address: 127.0.0.1:9222
+debugger_address: 127.0.0.1:9222
+
+# firfox调试地址
+#debugger_address: 127.0.0.1:2828
 
 driver_type: "chrome"
 #driver_type: "firefox"
@@ -10,25 +14,27 @@ driver_type: "chrome"
 # 是否包含自定义footer
 include_footer: true
 # 文章的标题
-title: 一键自动化博客发布工具,用过的人都说好(oschina篇)
+title: 一键自动化博客发布工具,用过的人都说好(腾讯云篇)
 # 文章的内容
-content: /Users/wayne/Downloads/blogthings/blogs/blog/projects/004-auto-blog-publish-tool-oschina.md
+content: /Users/wayne/Downloads/blogthings/blogs/blog/projects/011-auto-blog-publish-tool-txcloud.md
 # 文章的摘要
-summary: 使用一键自动化博客发布工具blog-auto-publishing-tools把博客发布到oschina上。
+summary: 使用一键自动化博客发布工具blog-auto-publishing-tools把博客发布到腾讯云篇上。
 
 # 是否自动发布博客，不经过人工review
 auto_publish: False
 
 enable:
-  csdn: False
-  jianshu: False
-  juejin: False
-  segmentfault: False
-  oschina: False
-  cnblogs: False
+  csdn: True
+  jianshu: True
+  juejin: True
+  segmentfault: True
+  oschina: True
+  cnblogs: True
   zhihu: True
-  cto51: False
-  infoq: False
+  cto51: True
+  infoq: True
   toutiao: True
-  alicloud: False
-  txcloud: False
+  alicloud: True
+  txcloud: True
+  mpweixin: True
+

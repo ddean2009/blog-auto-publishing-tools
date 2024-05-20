@@ -55,7 +55,8 @@ all_sites_home = {
     'infoq': 'https://www.infoq.cn/',
     'txcloud': 'https://cloud.tencent.com/developer/support-plan',
     'alicloud': 'https://developer.aliyun.com/',
-    'toutiao' : 'https://www.toutiao.com/'
+    'toutiao' : 'https://www.toutiao.com/',
+    'mpweixin': 'https://mp.weixin.qq.com/'
 }
 
 
