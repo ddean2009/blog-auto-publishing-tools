@@ -11,10 +11,4 @@ else
     echo "venv folder does not exist. Not activating..."
 fi
 
-#Set STARTUP_CMD as normal python if not specified
-if [[ -z "$STARTUP_CMD" ]]
-then
-    STARTUP_CMD=python
-fi
-
 python open_all.py

@@ -16,9 +16,11 @@ from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, 
 import time
 
 
-def infoq_publisher(driver):
+def infoq_publisher(driver,content=None):
     infoq_config = read_infoq()
     common_config = read_common()
+    if content:
+        common_config['content'] = content
 
     # 提取markdown文档的front matter内容：
     front_matter = parse_front_matter(common_config['content'])
@@ -48,7 +50,7 @@ def infoq_publisher(driver):
     # 文章标题
     title = driver.find_element(By.XPATH, '//input[@placeholder="请输入标题"]')
     title.clear()
-    if 'title' in front_matter['title'] and front_matter['title']:
+    if 'title' in front_matter and front_matter['title']:
         title.send_keys(front_matter['title'])
     else:
         title.send_keys(common_config['title'])
@@ -76,7 +78,7 @@ def infoq_publisher(driver):
     time.sleep(2)
 
     # 摘要
-    if 'description' in front_matter['description'] and front_matter['description']:
+    if 'description' in front_matter and front_matter['description']:
         summary = front_matter['description']
     else:
         summary = common_config['summary']

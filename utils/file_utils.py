@@ -16,6 +16,8 @@ script_path = os.path.abspath(__file__)
 
 # 脚本所在的目录
 script_dir = os.path.dirname(script_path)
+
+
 # print("脚本所在的目录是:", script_dir)
 
 
@@ -37,10 +39,18 @@ def list_files(video_dir, extension='.mp4'):
 
 
 def read_head(file):
-    with open(file, 'r', encoding='UTF-8') as file:
-        # 读取文件内容
-        head = file.readline()
-        return head
+    if os.path.exists(file):
+        with open(file, 'r', encoding='UTF-8') as file:
+            # 读取文件内容
+            head = file.readline()
+            return head
+    else:
+        return ""
+
+
+def write_to_file(content, file_name):
+    with open(file_name, 'w', encoding='UTF-8') as file:
+        file.write(content)
 
 
 # 读取第一行之后 添加一个回车，适用于第一行是文章标题的情况
@@ -130,7 +140,7 @@ def convert_md_to_html(md_filename, include_footer=True):
     directory = os.path.dirname(md_filename)
 
     # 构建输出的HTML文件名
-    html_filename = os.path.join(directory, base_name + str(include_footer)+'.html')
+    html_filename = os.path.join(directory, base_name + str(include_footer) + '.html')
 
     # 如果HTML文件已经存在，直接返回
     if os.path.exists(html_filename):

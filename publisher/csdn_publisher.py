@@ -16,12 +16,16 @@ from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, 
 import time
 
 
-def csdn_publisher(driver):
+def csdn_publisher(driver, content=None):
     csdn_config = read_csdn()
     common_config = read_common()
+    if content:
+        common_config['content'] = content
+    # print("content is :", common_config['content'])
     auto_publish = common_config['auto_publish']
     # 提取markdown文档的front matter内容：
     front_matter = parse_front_matter(common_config['content'])
+    # print("front_matter is :", front_matter)
 
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
@@ -34,7 +38,7 @@ def csdn_publisher(driver):
     # 文章标题
     title = driver.find_element(By.XPATH, '//div[contains(@class,"article-bar")]//input[contains(@placeholder,"请输入文章标题")]')
     title.clear()
-    if 'title' in front_matter['title'] and front_matter['title']:
+    if 'title' in front_matter and front_matter['title']:
         title.send_keys(front_matter['title'])
     else:
         title.send_keys(common_config['title'])
@@ -89,7 +93,7 @@ def csdn_publisher(driver):
         time.sleep(2)
 
     # 摘要
-    if 'description' in front_matter['description'] and front_matter['description']:
+    if 'description' in front_matter and front_matter['description']:
         summary = front_matter['description']
     else:
         summary = common_config['summary']

@@ -13,6 +13,9 @@ driver_type: "chrome"
 
 # 是否包含自定义footer
 include_footer: true
+# 要发布的文章目录
+content_dir : /Users/wayne/Downloads/blogthings/blogs/blog/projects/
+
 # 文章的标题
 title: 一键自动化博客发布工具,用过的人都说好(腾讯云篇)
 # 文章的内容

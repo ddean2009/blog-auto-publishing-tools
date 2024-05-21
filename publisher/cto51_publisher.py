@@ -15,9 +15,11 @@ from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, 
 import time
 
 
-def cto51_publisher(driver):
+def cto51_publisher(driver,content=None):
     cto51_config = read_51cto()
     common_config = read_common()
+    if content:
+        common_config['content'] = content
     auto_publish = common_config['auto_publish']
     # 提取markdown文档的front matter内容：
     front_matter = parse_front_matter(common_config['content'])
@@ -34,7 +36,7 @@ def cto51_publisher(driver):
     # 文章标题
     title = driver.find_element(By.ID, 'title')
     title.clear()
-    if 'title' in front_matter['title'] and front_matter['title']:
+    if 'title' in front_matter and front_matter['title']:
         title.send_keys(front_matter['title'])
     else:
         title.send_keys(common_config['title'])
@@ -90,7 +92,7 @@ def cto51_publisher(driver):
             tag_input.send_keys(Keys.ENTER)
 
     # 摘要
-    if 'description' in front_matter['description'] and front_matter['description']:
+    if 'description' in front_matter and front_matter['description']:
         summary = front_matter['description']
     else:
         summary = common_config['summary']

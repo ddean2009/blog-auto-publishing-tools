@@ -16,9 +16,11 @@ from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, 
 import time
 
 
-def alicloud_publisher(driver):
+def alicloud_publisher(driver, content=None):
     alicloud_config = read_alcloud()
     common_config = read_common()
+    if content:
+        common_config['content'] = content
     auto_publish = common_config['auto_publish']
     # 提取markdown文档的front matter内容：
     front_matter = parse_front_matter(common_config['content'])
@@ -33,7 +35,7 @@ def alicloud_publisher(driver):
     # 文章标题
     title = driver.find_element(By.XPATH, '//input[@placeholder="请填写标题"]')
     title.clear()
-    if 'title' in front_matter['title'] and front_matter['title']:
+    if 'title' in front_matter and front_matter['title']:
         title.send_keys(front_matter['title'])
     else:
         title.send_keys(common_config['title'])
@@ -46,7 +48,7 @@ def alicloud_publisher(driver):
     time.sleep(3)  # 等待3秒
 
     # 摘要
-    if 'description' in front_matter['description'] and front_matter['description']:
+    if 'description' in front_matter and front_matter['description']:
         summary = front_matter['description']
     else:
         summary = common_config['summary']

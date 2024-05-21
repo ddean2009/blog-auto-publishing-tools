@@ -15,9 +15,11 @@ from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, 
 import time
 
 
-def oschina_publisher(driver):
+def oschina_publisher(driver,content=None):
     oschina_config = read_oschina()
     common_config = read_common()
+    if content:
+        common_config['content'] = content
     auto_publish = common_config['auto_publish']
 
     # 提取markdown文档的front matter内容：
@@ -51,7 +53,7 @@ def oschina_publisher(driver):
     # 文章标题
     title = driver.find_element(By.NAME, 'title')
     title.clear()
-    if 'title' in front_matter['title'] and front_matter['title']:
+    if 'title' in front_matter and front_matter['title']:
         title.send_keys(front_matter['title'])
     else:
         title.send_keys(common_config['title'])

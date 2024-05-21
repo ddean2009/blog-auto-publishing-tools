@@ -1,3 +1,4 @@
 .pytest_cache/
 .idea/
 __pycache__/
+last_published.txt
