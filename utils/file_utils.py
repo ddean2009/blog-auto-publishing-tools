@@ -94,6 +94,7 @@ def read_file_with_footer(file):
         cleaned_content = remove_front_matter(content)
         cleaned_content = remove_truncate_content(cleaned_content)
         common_config = read_common()
+        footer = ""
         if common_config['include_footer']:
             current_dir = os.getcwd()
             footer = read_file(os.path.join(current_dir, 'config/footer.md'))
