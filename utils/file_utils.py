@@ -88,7 +88,7 @@ def read_file_all_content(file):
 
 
 def read_file_with_footer(file):
-    with open(file, 'r') as file:
+    with open(file, 'r', encoding='UTF-8') as file:
         # 读取文件内容
         content = file.read()
         cleaned_content = remove_front_matter(content)
@@ -166,7 +166,7 @@ def convert_md_to_html(md_filename, include_footer=True):
 
             # 把footer合并到html中
             # 打开两个文件：一个用于读取，另一个用于写入
-            with open(footer, 'r') as source_file, open(html_filename, 'a') as destination_file:
+            with open(footer, 'r', encoding='UTF-8') as source_file, open(html_filename, 'a', encoding='UTF-8') as destination_file:
                 # 读取源文件的内容
                 source_content = source_file.read()
                 # 将读取的内容追加到目标文件的末尾
