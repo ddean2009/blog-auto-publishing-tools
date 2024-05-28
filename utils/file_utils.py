@@ -121,19 +121,20 @@ def parse_front_matter(content_file):
     metadata = []
     markdown_content = read_file_all_content(content_file)
     # 使用正则表达式匹配Front matter部分
-    front_matter_pattern = re.compile(r'^---\n(.+?)\n---', re.DOTALL | re.MULTILINE)
+    # front_matter_pattern = re.compile(r'^---\n(.+?)\n---', re.DOTALL | re.MULTILINE)
+    front_matter_pattern = re.compile(r'^---\n(.+?)\n---', re.DOTALL)
     # 搜索并提取Front matter
     front_matter_match = front_matter_pattern.search(markdown_content)
     if front_matter_match:
         # 提取Front matter的内容
         front_matter_content = front_matter_match.group(1)
+        print(front_matter_content)
         # 使用yaml.safe_load解析YAML内容
         metadata = yaml.safe_load(front_matter_content)
         # print(metadata)
     else:
         print("没有找到Front matter部分。")
     return metadata
-
 
 def convert_md_to_html(md_filename, include_footer=True):
     # 获取文件名（不包含扩展名）和目录
@@ -209,3 +210,6 @@ def download_image(url):
 
     except Exception as e:
         print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    parse_front_matter("test.md")
