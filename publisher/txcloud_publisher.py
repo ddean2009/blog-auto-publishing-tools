@@ -10,6 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, read_file, parse_front_matter, download_image
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
     read_infoq, read_txcloud
@@ -35,6 +36,9 @@ def txcloud_publisher(driver,content=None):
     # 浏览器实例现在可以被重用，进行你的自动化操作
     driver.get(txcloud_config['site'])
     time.sleep(2)  # 等待2秒
+
+    wait_login(driver, By.XPATH,
+               '//div[@class="col-editor-switch"]//a')
 
     # 切换到markdown编辑器
     a_switch = driver.find_element(By.XPATH, '//div[@class="col-editor-switch"]//a')

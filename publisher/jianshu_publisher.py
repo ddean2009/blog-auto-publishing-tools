@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, parse_front_matter
 from utils.yaml_file_utils import read_jianshu, read_common
 import time
@@ -31,6 +32,7 @@ def jianshu_publisher(driver,content=None):
     wait = WebDriverWait(driver, 5)
 
     # 写文章按钮
+    wait_login(driver, By.CLASS_NAME, 'write-btn')
     write_btn = driver.find_element(By.CLASS_NAME, 'write-btn')
     write_btn.click()
     time.sleep(2)  # 等待3秒

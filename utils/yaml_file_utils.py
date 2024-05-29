@@ -1,3 +1,5 @@
+import shutil
+
 import yaml
 import os
 
@@ -34,7 +36,22 @@ def read_common():
     """
     # 获取当前工作目录
     current_dir = os.getcwd()
-    return read_yaml(os.path.join(current_dir, 'config/common.yaml'))  # 读取并返回配置文件中的数据
+
+    # 设置config目录和文件名
+    config_dir = 'config'
+    default_filename = 'common.default.yaml'
+    yaml_filename = 'common.yaml'
+
+    # 构建完整的文件路径
+    default_file_path = os.path.join(current_dir, config_dir, default_filename)
+    yaml_file_path = os.path.join(current_dir, config_dir, yaml_filename)
+
+    if not os.path.exists(yaml_file_path):
+        # 把config/common.default.yaml 拷贝为config/common.yaml
+        shutil.copy(default_file_path, yaml_file_path)
+        print(f"已复制 {default_file_path} 到 {yaml_file_path}")
+
+    return read_yaml(yaml_file_path)  # 读取并返回配置文件中的数据
 
 def read_common_video():
     """

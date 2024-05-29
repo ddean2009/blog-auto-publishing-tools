@@ -10,6 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, parse_front_matter
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
     read_infoq, read_txcloud, read_alcloud
@@ -33,6 +34,7 @@ def alicloud_publisher(driver, content=None):
     time.sleep(2)  # 等待2秒
 
     # 文章标题
+    wait_login(driver, By.XPATH, '//input[@placeholder="请填写标题"]')
     title = driver.find_element(By.XPATH, '//input[@placeholder="请填写标题"]')
     title.clear()
     if 'title' in front_matter and front_matter['title']:

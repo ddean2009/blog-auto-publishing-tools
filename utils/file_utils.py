@@ -128,7 +128,7 @@ def parse_front_matter(content_file):
     if front_matter_match:
         # 提取Front matter的内容
         front_matter_content = front_matter_match.group(1)
-        print(front_matter_content)
+        # print(front_matter_content)
         # 使用yaml.safe_load解析YAML内容
         metadata = yaml.safe_load(front_matter_content)
         # print(metadata)

@@ -10,6 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, convert_md_to_html, read_file, parse_front_matter
 from utils.selenium_utils import get_html_web_content
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
@@ -35,6 +36,7 @@ def toutiao_publisher(driver,content=None):
     time.sleep(2)  # 等待2秒
 
     # 文章标题
+    wait_login(driver, By.XPATH, '//div[@class="publish-editor-title-inner"]//textarea[contains(@placeholder,"请输入文章标题")]')
     title = driver.find_element(By.XPATH, '//div[@class="publish-editor-title-inner"]//textarea[contains(@placeholder,"请输入文章标题")]')
     title.clear()
     if 'title' in front_matter and front_matter['title']:

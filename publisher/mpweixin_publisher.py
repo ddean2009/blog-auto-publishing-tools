@@ -10,6 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, convert_md_to_html, read_file, parse_front_matter, download_image
 from utils.selenium_utils import get_html_web_content
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_mpweixin
@@ -36,6 +37,7 @@ def mpweixin_publisher(driver,content=None):
     time.sleep(2)  # 等待2秒
 
     # 点击图文消息
+    wait_login(driver, By.XPATH, '//div[@class="new-creation__menu-item"]//div[@class="new-creation__menu-title" and contains(text(), "图文消息")]')
     pic_and_article_button = driver.find_element(By.XPATH,
                                                  '//div[@class="new-creation__menu-item"]//div[@class="new-creation__menu-title" and contains(text(), "图文消息")]')
     pic_and_article_button.click()

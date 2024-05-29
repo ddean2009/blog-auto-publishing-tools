@@ -10,6 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, parse_front_matter
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina
 import time
@@ -35,6 +36,9 @@ def oschina_publisher(driver,content=None):
     time.sleep(2)  # 等待2秒
 
     # 文章内容
+    wait_login(driver, By.XPATH,
+               '//div[@class="CodeMirror-code"]//span[@role="presentation"]')
+
     file_content = read_file_with_footer(common_config['content'])
     # 用的是CodeMirror,不能用元素赋值的方法，所以我们使用拷贝的方法
     cmd_ctrl = Keys.COMMAND if sys.platform == 'darwin' else Keys.CONTROL

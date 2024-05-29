@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, parse_front_matter, download_image
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault
 import time
@@ -31,27 +32,8 @@ def segmentfault_publisher(driver,content=None):
     driver.get(segmentfault_config['site'])
     time.sleep(2)  # 等待2秒
 
-    # 文章内容
-    file_content = read_file_with_footer(common_config['content'])
-    # segmentfault比较特殊，用的是CodeMirror,不能用元素赋值的方法，所以我们使用拷贝的方法
-    cmd_ctrl = Keys.COMMAND if sys.platform == 'darwin' else Keys.CONTROL
-    # 将要粘贴的文本内容复制到剪贴板
-    pyperclip.copy(file_content)
-    action_chains = webdriver.ActionChains(driver)
-    # 三次tab按钮，让光标定位到内容窗口：
-    for i in range(3):
-        action_chains.key_down(Keys.TAB).key_up(Keys.TAB).perform()
-        time.sleep(1)
-
-    # 找到初始的内容描述文字
-    content = driver.find_element(By.XPATH, '//div[@class="CodeMirror-code"]//span[@role="presentation"]')
-    # print(content.get_attribute("innerHTML"))
-    content.click()
-    # 模拟实际的粘贴操作
-    action_chains.key_down(cmd_ctrl).send_keys('v').key_up(cmd_ctrl).perform()
-    time.sleep(3)  # 等待3秒
-
     # 文章标题
+    wait_login(driver, By.ID, 'title')
     title = driver.find_element(By.ID, 'title')
     title.clear()
     if 'title' in front_matter and front_matter['title']:
@@ -59,6 +41,30 @@ def segmentfault_publisher(driver,content=None):
     else:
         title.send_keys(common_config['title'])
     time.sleep(2)  # 等待3秒
+
+    # 文章内容
+    file_content = read_file_with_footer(common_config['content'])
+    # segmentfault比较特殊，用的是CodeMirror,不能用元素赋值的方法，所以我们使用拷贝的方法
+    cmd_ctrl = Keys.COMMAND if sys.platform == 'darwin' else Keys.CONTROL
+    # 将要粘贴的文本内容复制到剪贴板
+    pyperclip.copy(file_content)
+    action_chains = webdriver.ActionChains(driver)
+    # # 三次tab按钮，让光标定位到内容窗口：
+    # for i in range(4):
+    #     action_chains.key_down(Keys.TAB).key_up(Keys.TAB).perform()
+    #     time.sleep(1)
+
+    # 找到初始的内容描述文字
+    # content = driver.find_element(By.XPATH, '//div[@class="CodeMirror-code"]//span[@role="presentation"]')
+    content = driver.find_element(By.XPATH, '//div[@class="CodeMirror-code" and @role="presentation"]')
+    # print(content.get_attribute("innerHTML"))
+    action_chains.click(content).perform()
+    # content.click()
+    # 模拟实际的粘贴操作
+    action_chains.key_down(cmd_ctrl).send_keys('v').key_up(cmd_ctrl).perform()
+    time.sleep(3)  # 等待3秒
+
+
 
     # 添加标签
     tag_button = driver.find_element(By.ID, 'tags-toggle')
@@ -69,15 +75,16 @@ def segmentfault_publisher(driver,content=None):
     else:
         tag_list = segmentfault_config['tags']
     for tag in tag_list:
+        tag_input.clear()
         tag_input.send_keys(tag)
         tag_input.send_keys(Keys.ENTER)
         time.sleep(2)
     time.sleep(2)
 
-    # 发布按钮
-    publish_button = driver.find_element(By.ID, 'publish-toggle')
-    publish_button.click()
-    time.sleep(2)
+    # # 发布按钮
+    # publish_button = driver.find_element(By.ID, 'publish-toggle')
+    # publish_button.click()
+    # time.sleep(2)
 
     # 设置封面
     if 'image' in front_matter and front_matter['image']:

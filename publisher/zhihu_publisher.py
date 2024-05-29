@@ -1,7 +1,7 @@
 import sys
 
 import pyperclip
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import wait
@@ -10,6 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, convert_md_to_html, read_file, parse_front_matter, download_image
 from utils.selenium_utils import get_html_web_content
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu
@@ -27,6 +28,7 @@ def zhihu_publisher(driver,content=None):
 
     auto_publish = common_config['auto_publish']
 
+    # driver.switch_to.window(driver.window_handles[0])
     # 打开新标签页并切换到新标签页
     driver.switch_to.new_window('tab')
 
@@ -35,6 +37,8 @@ def zhihu_publisher(driver,content=None):
     time.sleep(2)  # 等待2秒
 
     # 文章标题
+    wait_login(driver, By.XPATH,
+               '//textarea[contains(@placeholder, "请输入标题")]')
     title = driver.find_element(By.XPATH, '//textarea[contains(@placeholder, "请输入标题")]')
     title.clear()
     if 'title' in front_matter and front_matter['title']:
@@ -64,11 +68,12 @@ def zhihu_publisher(driver,content=None):
     time.sleep(2)
     # 模拟实际的粘贴操作
     action_chains.key_down(cmd_ctrl).send_keys('v').key_up(cmd_ctrl).perform()
-    time.sleep(3)  # 等待5秒 不需要进行图片解析
+    time.sleep(3)  # 等待3秒 不需要进行图片解析
 
+    ActionChains(driver).scroll_by_amount(0, 800).perform()
     # 添加封面
     if 'image' in front_matter and front_matter['image']:
-        file_input = driver.find_element(By.XPATH, "//input[@type='file']")
+        file_input = driver.find_element(By.XPATH, "//input[@type='file' and @class='UploadPicture-input']")
         # 文件上传不支持远程文件上传，所以需要把图片下载到本地
         file_input.send_keys(download_image(front_matter['image']))
         time.sleep(2)
@@ -80,8 +85,9 @@ def zhihu_publisher(driver,content=None):
     # TODO
 
     # 专栏收录
-    pubish_panel = driver.find_element(By.ID, 'PublishPanel-columnLabel-1')
-    pubish_panel.click()
+    pubish_panel = driver.find_element(By.XPATH, '//label[@for="PublishPanel-columnLabel-1"]')
+    ActionChains(driver).click(pubish_panel).perform()
+    # pubish_panel.click()
 
     # 确认发布
     if auto_publish:

@@ -13,6 +13,17 @@ IF EXIST venv (
     echo venv 目录或文件不存在
 )
 
+set "config_dir=config"
+set "source_file=%config_dir%\common.default.yaml"
+set "target_file=%config_dir%\common.yaml"
+
+if not exist "%target_file%" (
+    copy "%source_file%" "%target_file%"
+) else (
+    echo %target_file% already exists.
+)
+
+
 REM Check if the batch was started via double-click
 IF /i "%%comspec%% /c %%~0 " equ "%%cmdcmdline:"=%%" (
     REM echo This script was started by double clicking.

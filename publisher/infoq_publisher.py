@@ -10,6 +10,7 @@ from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from publisher.common_handler import wait_login
 from utils.file_utils import read_file_with_footer, parse_front_matter, download_image
 from utils.yaml_file_utils import read_jianshu, read_common, read_segmentfault, read_oschina, read_zhihu, read_51cto, \
     read_infoq
@@ -34,6 +35,7 @@ def infoq_publisher(driver,content=None):
     time.sleep(2)  # 等待2秒
 
     # 点击立即创作按钮
+    wait_login(driver, By.XPATH, '//div[contains(@class, "write-btn")]')
     create_button = driver.find_element(By.XPATH, '//div[contains(@class, "write-btn")]')
     create_button.click()
     time.sleep(2)
