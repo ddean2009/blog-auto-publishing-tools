@@ -297,7 +297,7 @@ linux下面执行： setup.sh
 
 如果你对这个工具有什么问题，欢迎加入讨论组
 
-![博客自动发布工具讨论组](group.jpg)
+![](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202406200902638.png)
 
 
 # 系列教程
