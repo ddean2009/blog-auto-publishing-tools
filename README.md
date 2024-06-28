@@ -297,7 +297,7 @@ linux下面执行： setup.sh
 
 如果你对这个工具有什么问题，欢迎加入讨论组
 
-![](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202406200902638.png)
+![image-20240628103833848](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202406281038639.png)
 
 
 # 系列教程
@@ -333,7 +333,6 @@ linux下面执行： setup.sh
 [一键自动化博客发布工具,用过的人都说好(头条篇)](https://www.flydean.com/blog/projects/012-auto-blog-publish-tool-toutiao)
 
 [一键自动化博客发布工具,用过的人都说好(腾讯云篇)](https://www.flydean.com/blog/projects/011-auto-blog-publish-tool-txcloud)
-
 
 
 
