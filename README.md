@@ -109,39 +109,16 @@ alias chrome="/Applications/Google\ Chrome\ for\ Testing.app/Contents/MacOS/Goog
 ```bash
 chrome --remote-debugging-port=9222
 ```
-> !!!! 注意！！！
-> chrome启动之后，一定要新开一个空白tab页，或者随便打开一个网站，否则后面的selenium可能会出现假死的情况
 
-在命令行你会看到类似下面的内容：
-
->DevTools listening on ws://127.0.0.1:9222/devtools/browser/d4d05dd2-5b74-4380-b02d-12baa123445
-> 
-
-这行ws很重要，我们把它记下来。
 
 如果你是windows，那么在chrome的快捷方式后面加上 --remote-debugging-port=9222 参数。
 
 ![image-20240503190824756](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405031908055.png)
 
 
-
 启动chrome，输入chrome://version 检测 --remote-debugging-port=9222 是否出现在页面上。
 
 ![image-20240503190854471](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405031908887.png)
-
-
-
-然后输入：
-
-> http://localhost:9222/json/version
-
-获得 webSocketDebuggerUrl：
-
-
-
-![image-20240503190939248](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202405031909990.png)
-
-
 
 
 4. 修改配置文件
@@ -152,17 +129,12 @@ chrome --remote-debugging-port=9222
 # chrome driver地址
 service_location: /Users/wayne/Downloads/work/chromedriver-mac-arm64/chromedriver
 # chrome调试地址
-debugger_address: localhost:9222/devtools/browser/4aab2b8b-112c-48a3-ba38-12baa123445
+debugger_address: localhost:9222
 ```
 
 把service_location和debugger_address修改为你自己本机的配置。
 
 > 你也可以使用简单版本的 debugger_address: localhost:9222
->
-> 我在windows环境下测试过是可以连接的。
->
-> 在mac环境下有时可以连接，有时候不能连接，大家可以自行测试。(如果连不上，可以下载chrome for testing版本)
-> 如果还是有问题，联系我，我告诉你为啥连不上:-) 
 
 ## 使用firefox
 1. 下载并安装 [Firefox](https://www.mozilla.org/en-US/firefox/new/)。
