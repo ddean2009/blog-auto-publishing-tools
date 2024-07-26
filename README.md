@@ -272,7 +272,7 @@ linux下面执行： setup.sh
 
 如果你对这个工具有什么问题，欢迎加入讨论组
 
-![image-20240718164703768](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202407181647286.png)
+![image-20240726100542096](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202407261005306.png)
 
 
 
