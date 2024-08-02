@@ -272,7 +272,20 @@ linux下面执行： setup.sh
 
 如果你对这个工具有什么问题，欢迎加入讨论组
 
-![image-20240726100542096](https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202407261005306.png)
+
+
+<table>
+  <thead>
+    <tr>
+  <th>交流群</th>
+  <th>我的微信</th>
+  </tr>
+</thead>
+<tr>
+<td align="center"><img  src="https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202408021736562.png"></img></td>
+<td align="center"><img  src="https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202408021732303.png"></img></td>
+</tr>
+</table>
 
 
 
