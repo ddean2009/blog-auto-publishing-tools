@@ -276,6 +276,8 @@ linux下面执行： setup.sh
 
 
 
+
+
 <table>
   <thead>
     <tr>
@@ -284,10 +286,11 @@ linux下面执行： setup.sh
   </tr>
 </thead>
 <tr>
-<td align="center"><img  src="https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202408260951112.png"></img></td>
+<td align="center"><img  src="https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202409021649781.png"></img></td>
 <td align="center"><img  src="https://flydean-1301049335.cos.ap-guangzhou.myqcloud.com/img/202408021732303.png"></img></td>
 </tr>
 </table>
+
 
 
 
